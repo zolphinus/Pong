@@ -75,7 +75,7 @@ void GameController::initGame(){
 }
 
 
-void GameController::keyboard(Paddle& currentPlayer){
+void GameController::keyboard(Player& currentPlayer){
     //Handle events on queue
 
     SDL_Event e;
@@ -194,6 +194,28 @@ void GameController::setupPaddles(){
 
 
 void GameController::runGame(){
+
+    //loads a default image to prevent drawing issues should load checks somehow fail. Testing purposes only.
+    currentImage = gameImages[RED_PADDLE];
+
+    //Game Loop
+    while(quit == false){
+
+        //Input from players
+        keyboard(playerOne);
+
+        keyboard(playerTwo);
+
+        SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0x00, 0x00, 0x00 ) );
+
+        applySurface(playerOne);
+        applySurface(playerTwo);
+
+        SDL_UpdateWindowSurface(gameWindow);
+    }
+}
+
+void GameController::testGame(){
 
     //loads a default image to prevent drawing issues should load checks somehow fail. Testing purposes only.
     currentImage = gameImages[RED_PADDLE];

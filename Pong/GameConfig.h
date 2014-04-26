@@ -10,8 +10,16 @@ enum ImagesLoaded
     IMAGE_LOADED_TOTAL
 };
 
+enum AI
+{
+    //As we add images, add the appropriate image names just before IMAGE_LOADED_TOTAL so that
+    //it doesn't break any current systems but extends what we can load/draw
+    IS_AN_AI,
+    IS_NOT_AI
+};
+
 #include "GameObject.h"
-#include "Paddle.h"
+#include "Player.h"
 
 
 #endif // GAME_CONFIG

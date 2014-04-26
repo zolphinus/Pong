@@ -16,6 +16,7 @@ public:
     GameController();
     ~GameController();
     void runGame();
+    void testGame();
 
     void delay(int);
 
@@ -29,8 +30,8 @@ private:
     Uint8 *keystate; //smoother keyboard interactions
 
     //Game Objects
-    Paddle playerOne;
-    Paddle playerTwo;
+    Player playerOne;
+    Player playerTwo;
 
 
     //Holds all the game images for reuse
@@ -39,13 +40,12 @@ private:
     bool quit;
 
     void initGame();
-    void keyboard(Paddle&);
+    void keyboard(Player&);
     void close();
     void setupPaddles();
     void applySurface(GameObject&);
     bool loadMedia();
     SDL_Surface* loadSurface(std::string);
-
 
 };
 

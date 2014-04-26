@@ -13,6 +13,5 @@ int main(int argc, char* args[]){
 
 void testDriver(){
     GameController pong;
-    pong.runGame();
-    pong.delay(1);
+    pong.testGame();
 }
