@@ -1,18 +1,17 @@
 #ifndef PADDLE
 #define PADDLE
 #include <SDL.h>
+#include "GameObject.h"
 
 
-class Paddle{
+class Paddle : public GameObject
+{
 public:
     Paddle();
     ~Paddle();
-    SDL_Surface* getSurface();
-    void setSurface(SDL_Surface*);
-    SDL_Rect paddleRect;
 
 private:
-    SDL_Surface* paddleSurface;
+    bool isAI;
 
 };
 

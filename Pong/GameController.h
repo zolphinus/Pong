@@ -2,18 +2,13 @@
 #define GAME_CONTROLLER
 #include <SDL.h>
 #include <iostream>
-#include "Paddle.h"
+#include "GameConfig.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int SPRITE_SIZE = 32;
 
-enum ImagesLoaded
-{
-    BLUE_PADDLE,
-    RED_PADDLE,
-    IMAGE_LOADED_TOTAL
-};
+
 
 
 class GameController{
@@ -33,6 +28,7 @@ private:
     SDL_Surface* tempSurface;
     Uint8 *keystate; //smoother keyboard interactions
 
+    //Game Objects
     Paddle playerOne;
     Paddle playerTwo;
 
@@ -40,13 +36,13 @@ private:
     //Holds all the game images for reuse
     SDL_Surface* gameImages[IMAGE_LOADED_TOTAL];
 
-    SDL_Event e;
     bool quit;
 
     void initGame();
     void keyboard(Paddle&);
     void close();
     void setupPaddles();
+    void applySurface(GameObject&);
     bool loadMedia();
     SDL_Surface* loadSurface(std::string);
 
