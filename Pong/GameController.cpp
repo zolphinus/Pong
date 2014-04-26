@@ -1,6 +1,5 @@
 #include "GameController.h"
 #include <iostream>
-#include <SDL.h>
 
 using std::cout;
 using std::cin;

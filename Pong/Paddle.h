@@ -1,6 +1,7 @@
 #ifndef PADDLE
 #define PADDLE
-#include <SDL.h>
+
+#include "GameConfig.h"
 #include "GameObject.h"
 
 

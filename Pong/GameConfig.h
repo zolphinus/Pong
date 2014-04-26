@@ -1,6 +1,9 @@
 #ifndef GAME_CONFIG
 #define GAME_CONFIG
 
+#include <vector>
+#include <SDL.h>
+
 enum ImagesLoaded
 {
     //As we add images, add the appropriate image names just before IMAGE_LOADED_TOTAL so that
@@ -8,6 +11,15 @@ enum ImagesLoaded
     BLUE_PADDLE,
     RED_PADDLE,
     IMAGE_LOADED_TOTAL
+};
+
+enum buttonEvent
+{
+    QUIT,
+    RESUME,
+    START_AI,
+    START_PVP
+
 };
 
 #include "GameObject.h"

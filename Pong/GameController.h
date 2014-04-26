@@ -1,8 +1,9 @@
 #ifndef GAME_CONTROLLER
 #define GAME_CONTROLLER
-#include <SDL.h>
-#include <iostream>
+
 #include "GameConfig.h"
+#include <iostream>
+#include "MenuController.h"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -31,6 +32,9 @@ private:
     //Game Objects
     Paddle playerOne;
     Paddle playerTwo;
+
+    //Menu objects
+    MenuController mainMenu, pauseMenu;
 
 
     //Holds all the game images for reuse
