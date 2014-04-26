@@ -1,6 +1,10 @@
 #ifndef GAME_CONFIG
 #define GAME_CONFIG
 
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
+const int SPRITE_SIZE = 32;
+
 enum ImagesLoaded
 {
     //As we add images, add the appropriate image names just before IMAGE_LOADED_TOTAL so that

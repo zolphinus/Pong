@@ -341,8 +341,7 @@
 	<iostream>
 	<SDL.h>
 
-1398556614 c:\users\zolphinus\documents\github\pong\pong\gamecontroller.h
-	<SDL.h>
+1398559120 c:\users\zolphinus\documents\github\pong\pong\gamecontroller.h
 	<iostream>
 	"GameConfig.h"
 
@@ -350,8 +349,7 @@
 	<SDL.h>
 	"GameObject.h"
 
-1398556599 source:c:\users\zolphinus\documents\github\pong\pong\main.cpp
-	<SDL.h>
+1398559332 source:c:\users\zolphinus\documents\github\pong\pong\main.cpp
 	"GameController.h"
 
 1398138935 source:c:\users\zolphinus\documents\github\pong\pong\paddle.cpp
@@ -363,7 +361,7 @@
 1398553520 source:c:\users\zolphinus\documents\github\pong\pong\gameobject.cpp
 	"GameObject.h"
 
-1398558414 c:\users\zolphinus\documents\github\pong\pong\gameconfig.h
+1398559232 c:\users\zolphinus\documents\github\pong\pong\gameconfig.h
 	<SDL.h>
 	"GameObject.h"
 	"Player.h"
@@ -376,10 +374,10 @@
 1398556842 source:c:\users\zolphinus\documents\github\pong\pong\player.cpp
 	"Player.h"
 
-1398558457 c:\users\zolphinus\documents\github\pong\pong\score.h
+1398559005 c:\users\zolphinus\documents\github\pong\pong\score.h
 	<SDL.h>
 	"GameObject.h"
 
-1398558548 source:c:\users\zolphinus\documents\github\pong\pong\score.cpp
+1398559137 source:c:\users\zolphinus\documents\github\pong\pong\score.cpp
 	"GameConfig.h"
 

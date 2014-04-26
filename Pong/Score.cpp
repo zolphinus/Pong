@@ -1,7 +1,7 @@
 #include "GameConfig.h"
 
 Score::Score(){
-    resetScore;
+    resetScore();
 }
 
 Score::~Score(){
