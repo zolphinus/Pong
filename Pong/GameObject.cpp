@@ -17,5 +17,9 @@ SDL_Surface* GameObject::getSurface(){
 
 void GameObject::setSurface(SDL_Surface* newSurface){
     gameObjectSurface = newSurface;
+    gameObjectRect.w = newSurface -> w;
+    gameObjectRect.h = newSurface -> h;
+    std::cout << gameObjectRect.w << std::endl;
+    std::cout << gameObjectRect.h << std::endl;
 }
 

@@ -36,11 +36,19 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2" />
 			<Add directory="C:/MINGW LIBRARIES/i686-w64-mingw32/lib" />
 		</Linker>
+		<Unit filename="Button.cpp" />
+		<Unit filename="Button.h" />
+		<Unit filename="GameConfig.h" />
 		<Unit filename="GameController.cpp" />
 		<Unit filename="GameController.h" />
+		<Unit filename="GameObject.cpp" />
+		<Unit filename="GameObject.h" />
 		<Unit filename="Main.cpp" />
+		<Unit filename="MenuController.cpp" />
+		<Unit filename="MenuController.h" />
 		<Unit filename="Paddle.cpp" />
 		<Unit filename="Paddle.h" />
+		<Unit filename="Score.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

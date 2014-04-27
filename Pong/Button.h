@@ -2,7 +2,6 @@
 #define BUTTON_H
 
 #include "GameConfig.h"
-#include "GameObject.h"
 
 class Button : public GameObject
 {
@@ -13,7 +12,7 @@ public:
 
     bool getClicked();
     bool getMouseOver();
-    void handleEvent(SDL_Event *event);
+    void handleEvent(SDL_Event *);
 
 private:
 

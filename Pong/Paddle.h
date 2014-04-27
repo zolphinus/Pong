@@ -2,7 +2,6 @@
 #define PADDLE
 
 #include "GameConfig.h"
-#include "GameObject.h"
 
 
 class Paddle : public GameObject
