@@ -1,7 +1,9 @@
 #ifndef SCORE
 #define SCORE
+
 #include <SDL.h>
-#include "GameObject.h"
+//#include "GameConfig.h"
+//#include "GameObject.h"
 
 
 class Score : public GameObject

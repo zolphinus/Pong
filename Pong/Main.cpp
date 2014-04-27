@@ -11,5 +11,5 @@ int main(int argc, char* args[]){
 
 void testDriver(){
     GameController pong;
-    pong.testGame();
+    pong.runGame();
 }

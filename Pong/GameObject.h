@@ -1,8 +1,7 @@
 #ifndef GAME_OBJECT
 #define GAME_OBJECT
 
-#include "GameConfig.h"
-
+#include <SDL.h>
 
 //Balls, paddles, scores, walls can use this setup
 
@@ -14,7 +13,7 @@ public:
     void setSurface(SDL_Surface*);
     SDL_Rect gameObjectRect;
 
-private:
+protected:
     SDL_Surface* gameObjectSurface;
 
 };

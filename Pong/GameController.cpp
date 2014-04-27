@@ -32,6 +32,7 @@ void GameController::delay(int seconds){
 }
 
 void GameController::initGame(){
+
     gameWindow = NULL;
     screenSurface = NULL;
     currentImage = NULL;
@@ -214,7 +215,7 @@ void GameController::setupObjects(){
     playerTwo.gameObjectRect.y = 0;
     playerTwo.gameObjectRect.x = SCREEN_WIDTH - 2*SPRITE_SIZE;
 
-    playerTwo.setScoreSide(RIGHT);
+//    playerTwo.setScoreSide(RIGHT);
 
 }
 

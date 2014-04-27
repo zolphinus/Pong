@@ -33,7 +33,8 @@ void Button::handleEvent(SDL_Event *event)
 
     int mouseX,mouseY, buttonState;
 
-    buttonState = SDL_GetMouseState(&x,&y);
+
+    buttonState = SDL_GetMouseState(&mouseX,&mouseY);
 
     if(mouseX > x && mouseX < x + gameObjectRect.w && mouseY > y && mouseY < y + gameObjectRect.h)
     {

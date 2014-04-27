@@ -10,7 +10,7 @@ Score::~Score(){
 void Score::resetScore()
 {
     scoreValue = 0;
-    GameObject::setSurface(NULL);
+    GameObject::gameObjectSurface = NULL;
 }
 
 void Score::setScoreValue(int newScore)

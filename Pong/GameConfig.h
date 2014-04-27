@@ -48,8 +48,9 @@ enum buttonEvent
 };
 
 #include "GameObject.h"
-#include "Player.h"
 #include "Score.h"
+#include "Player.h"
+
 
 
 #endif // GAME_CONFIG

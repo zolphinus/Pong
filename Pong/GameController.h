@@ -46,7 +46,6 @@ private:
     void keyboard(Player&);
     void close();
     void setupObjects();
-    void applySurface(GameObject&);
 
 
     void initMainMenu();
