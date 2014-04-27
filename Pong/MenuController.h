@@ -11,14 +11,16 @@ public:
     MenuController();
     ~MenuController();
 
-    void addButton(Button,buttonEvent);
+    void addButton(Button*,buttonEvent);
 
-    void handleEvent(SDL_Event *e);
+    buttonEvent handleEvent(SDL_Event *);
+
+    void drawMenu(SDL_Surface *);
 
 
 private:
 
-    std::vector<Button> myButtons;
+    std::vector<Button*> myButtons;
     std::vector<buttonEvent> myEvents;
 };
 

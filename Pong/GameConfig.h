@@ -2,6 +2,7 @@
 #define GAME_CONFIG
 
 #include <vector>
+#include <iostream>
 #include <SDL.h>
 #include <stdlib.h>
 #include <ctime>
@@ -12,6 +13,7 @@ enum ImagesLoaded
     //it doesn't break any current systems but extends what we can load/draw
     BLUE_PADDLE,
     RED_PADDLE,
+    TEST_BUTTON,
     IMAGE_LOADED_TOTAL
 };
 
@@ -20,7 +22,8 @@ enum buttonEvent
     QUIT,
     RESUME,
     START_AI,
-    START_PVP
+    START_PVP,
+    MAIN_MENU
 
 };
 

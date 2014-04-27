@@ -71,9 +71,21 @@ void GameController::initGame(){
         }
 
         setupPaddles();
+        initMainMenu();
     }
 }
 
+void GameController::initMainMenu()
+{
+    Button *newButton = new Button(0,0);
+    newButton->setSurface(gameImages[TEST_BUTTON]);
+    mainMenu.addButton(newButton,RESUME);
+}
+
+void GameController::drawMainMenu()
+{
+    mainMenu.drawMenu(screenSurface);
+}
 
 void GameController::keyboard(Paddle& currentPlayer){
     //Handle events on queue
@@ -173,6 +185,12 @@ bool GameController::loadMedia()
         return false;
     }
 
+    gameImages[TEST_BUTTON] = loadSurface("images/Green_button.bmp");
+    if(gameImages[TEST_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
     return success;
 }
 
@@ -185,7 +203,7 @@ void GameController::setupPaddles(){
 
 
     playerTwo.gameObjectRect.y = 0;
-    playerTwo.gameObjectRect.x = SCREEN_WIDTH - SPRITE_SIZE;
+    playerTwo.gameObjectRect.x = SCREEN_WIDTH - 2*SPRITE_SIZE;
 
     playerTwo.setSurface(gameImages[RED_PADDLE]);
 
@@ -210,6 +228,12 @@ void GameController::runGame(){
 
         applySurface(playerOne);
         applySurface(playerTwo);
+
+        drawMainMenu();
+
+        SDL_Event *event = NULL;
+        SDL_PollEvent(event);
+        mainMenu.handleEvent(event);
 
         SDL_UpdateWindowSurface(gameWindow);
     }
