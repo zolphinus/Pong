@@ -70,7 +70,7 @@ void GameController::initGame(){
             quit = true;
         }
 
-        setupPaddles();
+        setupObjects();
     }
 }
 
@@ -173,22 +173,30 @@ bool GameController::loadMedia()
         return false;
     }
 
+    gameImages[NUMBER_ONE] = loadSurface("images/red_paddle.bmp");
+    if(gameImages[NUMBER_ONE] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
     return success;
 }
 
-void GameController::setupPaddles(){
+void GameController::setupObjects(){
 
     //Initializes starting locations for paddles
     playerOne.setSurface(gameImages[BLUE_PADDLE]);
     playerOne.gameObjectRect.y = 0;
     playerOne.gameObjectRect.x = SPRITE_SIZE;
 
+    playerOne.setScoreSide(LEFT);
+    playerOne.setScore(1, gameImages[NUMBER_ONE]);
 
+
+    playerTwo.setSurface(gameImages[RED_PADDLE]);
     playerTwo.gameObjectRect.y = 0;
     playerTwo.gameObjectRect.x = SCREEN_WIDTH - SPRITE_SIZE;
 
-    playerTwo.setSurface(gameImages[RED_PADDLE]);
-
+    playerTwo.setScoreSide(RIGHT);
 
 }
 
@@ -232,6 +240,7 @@ void GameController::testGame(){
 
         applySurface(playerOne);
         applySurface(playerTwo);
+        applySurface(playerOne.getMyScore());
 
         SDL_UpdateWindowSurface(gameWindow);
     }

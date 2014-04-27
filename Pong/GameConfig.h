@@ -11,6 +11,7 @@ enum ImagesLoaded
     //it doesn't break any current systems but extends what we can load/draw
     BLUE_PADDLE,
     RED_PADDLE,
+    NUMBER_ONE,
     IMAGE_LOADED_TOTAL
 };
 

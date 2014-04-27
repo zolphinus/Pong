@@ -38,7 +38,7 @@ private:
     void initGame();
     void keyboard(Player&);
     void close();
-    void setupPaddles();
+    void setupObjects();
     void applySurface(GameObject&);
     bool loadMedia();
     SDL_Surface* loadSurface(std::string);
