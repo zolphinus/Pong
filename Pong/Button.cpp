@@ -36,7 +36,7 @@ void Button::handleEvent(SDL_Event *event)
 
     buttonState = SDL_GetMouseState(&mouseX,&mouseY);
 
-    if(mouseX > x && mouseX < x + gameObjectRect.w && mouseY > y && mouseY < y + gameObjectRect.h)
+    if(mouseX > gameObjectRect.x && mouseX < gameObjectRect.x + gameObjectRect.w && mouseY > gameObjectRect.y && mouseY < gameObjectRect.y + gameObjectRect.h)
     {
         mouseOver = true;
         if(buttonState == 1)
