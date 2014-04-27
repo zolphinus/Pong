@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <SDL.h>
+#include <stdlib.h>
+#include <ctime>
 
 enum ImagesLoaded
 {
