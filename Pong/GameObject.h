@@ -1,6 +1,7 @@
 #ifndef GAME_OBJECT
 #define GAME_OBJECT
-#include <SDL.h>
+
+#include "GameConfig.h"
 
 
 //Balls, paddles, scores, walls can use this setup

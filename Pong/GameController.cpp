@@ -1,6 +1,5 @@
 #include "GameController.h"
 #include <iostream>
-#include <SDL.h>
 
 using std::cout;
 using std::cin;
@@ -71,9 +70,21 @@ void GameController::initGame(){
         }
 
         setupObjects();
+        initMainMenu();
     }
 }
 
+void GameController::initMainMenu()
+{
+    Button *newButton = new Button(0,0);
+    newButton->setSurface(gameImages[TEST_BUTTON]);
+    mainMenu.addButton(newButton,RESUME);
+}
+
+void GameController::drawMainMenu()
+{
+    mainMenu.drawMenu(screenSurface);
+}
 
 void GameController::keyboard(Player& currentPlayer){
     //Handle events on queue
@@ -178,6 +189,13 @@ bool GameController::loadMedia()
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
     }
+
+    gameImages[TEST_BUTTON] = loadSurface("images/Green_button.bmp");
+    if(gameImages[TEST_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
     return success;
 }
 
@@ -194,7 +212,7 @@ void GameController::setupObjects(){
 
     playerTwo.setSurface(gameImages[RED_PADDLE]);
     playerTwo.gameObjectRect.y = 0;
-    playerTwo.gameObjectRect.x = SCREEN_WIDTH - SPRITE_SIZE;
+    playerTwo.gameObjectRect.x = SCREEN_WIDTH - 2*SPRITE_SIZE;
 
     playerTwo.setScoreSide(RIGHT);
 
@@ -218,6 +236,12 @@ void GameController::runGame(){
 
         applySurface(playerOne);
         applySurface(playerTwo);
+
+        drawMainMenu();
+
+        SDL_Event *event = NULL;
+        SDL_PollEvent(event);
+        mainMenu.handleEvent(event);
 
         SDL_UpdateWindowSurface(gameWindow);
     }

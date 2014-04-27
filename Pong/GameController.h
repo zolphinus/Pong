@@ -1,7 +1,9 @@
 #ifndef GAME_CONTROLLER
 #define GAME_CONTROLLER
-#include <iostream>
 #include "GameConfig.h"
+#include <iostream>
+#include "MenuController.h"
+#include "Button.h"
 
 
 
@@ -16,6 +18,9 @@ public:
 
     void delay(int);
 
+protected:
+
+    void applySurface(GameObject&);
 
 private:
     SDL_Window* gameWindow;
@@ -29,6 +34,8 @@ private:
     Player playerOne;
     Player playerTwo;
 
+    //Menu objects
+    MenuController mainMenu, pauseMenu;
 
     //Holds all the game images for reuse
     SDL_Surface* gameImages[IMAGE_LOADED_TOTAL];
@@ -40,6 +47,14 @@ private:
     void close();
     void setupObjects();
     void applySurface(GameObject&);
+
+
+    void initMainMenu();
+    void initPauseMenu();
+
+    void drawMainMenu();
+    void drawPauseMenu();
+
     bool loadMedia();
     SDL_Surface* loadSurface(std::string);
 
