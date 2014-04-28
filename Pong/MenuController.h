@@ -11,9 +11,11 @@ public:
     MenuController();
     ~MenuController();
 
+    //add a button to the menu's list of buttons
     void addButton(Button*,buttonEvent);
 
-    buttonEvent handleEvent(SDL_Event *);
+    //Checks whether a button was clicked, and if it was, returns the action type associated with that button
+    buttonEvent mouseCheck();
 
     void drawMenu(SDL_Surface *);
 

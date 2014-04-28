@@ -22,16 +22,12 @@ enum ImagesLoaded
 
 enum AI
 {
-    //As we add images, add the appropriate image names just before IMAGE_LOADED_TOTAL so that
-    //it doesn't break any current systems but extends what we can load/draw
     IS_AN_AI,
     IS_NOT_AI
 };
 
 enum Score_Side
 {
-    //As we add images, add the appropriate image names just before IMAGE_LOADED_TOTAL so that
-    //it doesn't break any current systems but extends what we can load/draw
     LEFT,
     RIGHT
 };
@@ -39,6 +35,8 @@ enum Score_Side
 
 enum buttonEvent
 {
+    //Add events here as needed
+    NONE,
     QUIT,
     RESUME,
     START_AI,

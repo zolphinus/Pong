@@ -12,11 +12,11 @@ public:
 
     bool getClicked();
     bool getMouseOver();
-    void handleEvent(SDL_Event *);
+
+    void mouseCheck();
 
 private:
 
-    int x,y;
     bool isClicked;
     bool mouseOver;
 

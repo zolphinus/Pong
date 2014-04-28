@@ -7,7 +7,8 @@ using std::endl;
 
 
 
-GameController::GameController(){
+GameController::GameController() : upPressed(false),downPressed(false)
+{
     initGame();
 }
 
@@ -79,7 +80,7 @@ void GameController::initMainMenu()
 {
     Button *newButton = new Button(0,0);
     newButton->setSurface(gameImages[TEST_BUTTON]);
-    mainMenu.addButton(newButton,RESUME);
+    mainMenu.addButton(newButton,QUIT);
 }
 
 void GameController::drawMainMenu()
@@ -102,20 +103,17 @@ void GameController::keyboard(Player& currentPlayer){
             quit = true;
         }
         //User presses a key
-        else
-
-
-            if( e.type == SDL_KEYDOWN )
+        else if( e.type == SDL_KEYDOWN )
         {
             //Select surfaces based on key press
             switch( e.key.keysym.sym )
             {
                 case SDLK_UP:
-                currentPlayer.gameObjectRect.y -= 9;
+                upPressed = true;
                 break;
 
                 case SDLK_DOWN:
-                currentPlayer.gameObjectRect.y += 9;
+                downPressed = true;
                 break;
 
                 case SDLK_LEFT:
@@ -134,6 +132,29 @@ void GameController::keyboard(Player& currentPlayer){
             }
 
         }
+        else if(e.type == SDL_KEYUP)
+        {
+            switch( e.key.keysym.sym )
+            {
+                case SDLK_UP:
+                upPressed = false;
+                break;
+
+                case SDLK_DOWN:
+                downPressed = false;
+                break;
+            }
+        }
+    }
+
+    if(upPressed)
+    {
+        currentPlayer.gameObjectRect.y -= 9;
+    }
+
+    if(downPressed)
+    {
+        currentPlayer.gameObjectRect.y += 9;
     }
 }
 
@@ -238,13 +259,16 @@ void GameController::runGame(){
         applySurface(playerOne);
         applySurface(playerTwo);
 
-        drawMainMenu();
+        /*drawMainMenu();
 
-        SDL_Event *event = NULL;
-        SDL_PollEvent(event);
-        mainMenu.handleEvent(event);
+        /*if(mainMenu.mouseCheck() == QUIT)
+        {
+            quit = true;
+        }*/
 
         SDL_UpdateWindowSurface(gameWindow);
+
+        SDL_Delay(17);
     }
 }
 

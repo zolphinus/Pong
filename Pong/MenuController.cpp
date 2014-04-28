@@ -16,16 +16,20 @@ void MenuController::addButton(Button *newButton, buttonEvent newEvent)
     myEvents.push_back(newEvent);
 }
 
-buttonEvent MenuController::handleEvent(SDL_Event *event)
+buttonEvent MenuController::mouseCheck()
 {
+    buttonEvent currentEvent = NONE;
     for(int i = 0;i<myButtons.size();i++)
     {
-        myButtons.at(i)->handleEvent(event);
+        myButtons.at(i)->mouseCheck();
         if(myButtons.at(i)->getClicked())
         {
             std::cout << "Clicked button." << std::endl;
+            currentEvent = myEvents.at(i);
         }
     }
+
+    return currentEvent;
 }
 
 void MenuController::drawMenu(SDL_Surface *surf)

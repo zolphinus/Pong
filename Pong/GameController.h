@@ -42,6 +42,8 @@ private:
 
     bool quit;
 
+    bool upPressed,downPressed;
+
     void initGame();
     void keyboard(Player&);
     void close();

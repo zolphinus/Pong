@@ -26,20 +26,20 @@ bool Button::getMouseOver()
     return mouseOver;
 }
 
-void Button::handleEvent(SDL_Event *event)
+void Button::mouseCheck()
 {
     isClicked = false;
     mouseOver = false;
 
     int mouseX,mouseY, buttonState;
 
-
     buttonState = SDL_GetMouseState(&mouseX,&mouseY);
 
-    if(mouseX > gameObjectRect.x && mouseX < gameObjectRect.x + gameObjectRect.w && mouseY > gameObjectRect.y && mouseY < gameObjectRect.y + gameObjectRect.h)
+    if(mouseX > gameObjectRect.x && mouseX < gameObjectRect.x + gameObjectRect.w
+       && mouseY > gameObjectRect.y && mouseY < gameObjectRect.y + gameObjectRect.h) //Mouse is on the button
     {
         mouseOver = true;
-        if(buttonState == 1)
+        if(buttonState == 1)//left button down
         {
             isClicked = true;
         }
