@@ -28,7 +28,6 @@ private:
     SDL_Surface* backSurface;
     SDL_Surface* currentImage;
     SDL_Surface* tempSurface;
-    SDL_Renderer* gameRenderer;
     Uint8 *keystate; //smoother keyboard interactions
 
     //Game Objects
@@ -39,7 +38,7 @@ private:
     MenuController mainMenu, pauseMenu;
 
     //Holds all the game images for reuse
-    SDL_Texture* gameImages[IMAGE_LOADED_TOTAL];
+    SDL_Surface* gameImages[IMAGE_LOADED_TOTAL];
 
     bool quit;
 
@@ -50,8 +49,6 @@ private:
     void close();
     void setupObjects();
 
-    //For framerate calculations
-    int timeCounter;
 
     void initMainMenu();
     void initPauseMenu();
