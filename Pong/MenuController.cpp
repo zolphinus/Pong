@@ -32,10 +32,10 @@ buttonEvent MenuController::mouseCheck()
     return currentEvent;
 }
 
-void MenuController::drawMenu(SDL_Surface *surf)
+void MenuController::drawMenu(SDL_Renderer *renderer)
 {
     for(int i = 0;i<myButtons.size();i++)
     {
-        SDL_BlitSurface(myButtons.at(i)->getSurface(), NULL, surf, &myButtons.at(i)->gameObjectRect);
+        SDL_RenderCopy(renderer,myButtons.at(i)->getTexture(),NULL,&myButtons.at(i)->gameObjectRect);
     }
 }

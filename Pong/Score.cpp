@@ -10,7 +10,8 @@ Score::~Score(){
 void Score::resetScore()
 {
     scoreValue = 0;
-    GameObject::gameObjectSurface = NULL;
+    SDL_DestroyTexture(gameObjectTexture);
+    gameObjectTexture = NULL;
 }
 
 void Score::setScoreValue(int newScore)
@@ -24,14 +25,14 @@ int Score::getScoreValue()
 }
 
 
-void Score::setScoreImage(SDL_Surface* newScore)
+void Score::setScoreImage(SDL_Surface* newScore,SDL_Renderer *renderer)
 {
-    GameObject::setSurface(newScore);
+    GameObject::setTexture(newScore,renderer);
 }
 
-SDL_Surface* Score::getScoreImage()
+SDL_Texture* Score::getScoreImage()
 {
-    return GameObject::getSurface();
+    return GameObject::getTexture();
 }
 
 void Score::setSide(Score_Side newSide)

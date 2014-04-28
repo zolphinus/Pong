@@ -13,10 +13,10 @@ public:
     ~Score();
     void setSide(Score_Side); //Sets which side of the field the score can display to
     void setScoreValue(int newScore);
-    void setScoreImage(SDL_Surface* newScore);
+    void setScoreImage(SDL_Surface *,SDL_Renderer *);
     void resetScore();
 
-    SDL_Surface* getScoreImage();
+    SDL_Texture* getScoreImage();
     int getScoreValue();
 
 private:

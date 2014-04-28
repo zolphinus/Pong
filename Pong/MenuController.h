@@ -17,7 +17,7 @@ public:
     //Checks whether a button was clicked, and if it was, returns the action type associated with that button
     buttonEvent mouseCheck();
 
-    void drawMenu(SDL_Surface *);
+    void drawMenu(SDL_Renderer *);
 
 
 private:

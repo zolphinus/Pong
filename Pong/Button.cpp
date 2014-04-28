@@ -7,8 +7,6 @@ Button::Button(int x, int y)
 
     isClicked = false;
     mouseOver = false;
-
-    std::cout << "Button made" << std::endl;
 }
 
 Button::~Button()
@@ -28,9 +26,6 @@ bool Button::getMouseOver()
 
 void Button::mouseCheck()
 {
-    isClicked = false;
-    mouseOver = false;
-
     int mouseX,mouseY, buttonState;
 
     buttonState = SDL_GetMouseState(&mouseX,&mouseY);
@@ -43,5 +38,14 @@ void Button::mouseCheck()
         {
             isClicked = true;
         }
+        else
+        {
+            isClicked = false;
+        }
+    }
+    else
+    {
+        mouseOver = false;
+        isClicked = false;
     }
 }

@@ -2,24 +2,27 @@
 #include <iostream>
 
 GameObject::GameObject(){
-    gameObjectSurface = NULL;
+    gameObjectTexture = NULL;
 
 }
 
 GameObject::~GameObject(){
-    SDL_FreeSurface(gameObjectSurface);
+    SDL_DestroyTexture(gameObjectTexture);
 }
 
 
-SDL_Surface* GameObject::getSurface(){
-    return gameObjectSurface;
+SDL_Texture* GameObject::getTexture(){
+    return gameObjectTexture;
 }
 
-void GameObject::setSurface(SDL_Surface* newSurface){
-    gameObjectSurface = newSurface;
+void GameObject::setTexture(SDL_Surface *newSurface,SDL_Renderer *renderer)
+{
+    if(gameObjectTexture != NULL)
+    {
+        SDL_DestroyTexture(gameObjectTexture);
+    }
+    gameObjectTexture = SDL_CreateTextureFromSurface(renderer,newSurface);
     gameObjectRect.w = newSurface -> w;
     gameObjectRect.h = newSurface -> h;
-    std::cout << gameObjectRect.w << std::endl;
-    std::cout << gameObjectRect.h << std::endl;
 }
 

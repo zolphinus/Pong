@@ -35,9 +35,6 @@ void GameController::delay(int seconds){
 void GameController::initGame(){
 
     gameWindow = NULL;
-    screenSurface = NULL;
-    currentImage = NULL;
-    tempSurface = NULL;
     quit = false;
 
     //error check for initialization
@@ -51,16 +48,17 @@ void GameController::initGame(){
                 //creating our window
         gameWindow = SDL_CreateWindow("PONG", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                   SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-        if( gameWindow == NULL ){
+
+        if( gameWindow == NULL )
+        {
             cout << "Window could not be created! " << SDL_GetError();
         }
-        else{
-        //Get window surface
-        screenSurface = SDL_GetWindowSurface( gameWindow );
+        else
+        {
+            //Create renderer
+            gameRenderer = SDL_CreateRenderer(gameWindow,-1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            SDL_SetRenderDrawColor(gameRenderer,0x00,0x00,0x00,0xFF);
 
-        //Fill the surface black
-        SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0x00, 0x00, 0x00 ) );
-        SDL_UpdateWindowSurface( gameWindow );
         }
 
         bool mediaLoaded = loadMedia();
@@ -79,13 +77,13 @@ void GameController::initGame(){
 void GameController::initMainMenu()
 {
     Button *newButton = new Button(0,0);
-    newButton->setSurface(gameImages[TEST_BUTTON]);
+    newButton->setTexture(gameImages[TEST_BUTTON],gameRenderer);
     mainMenu.addButton(newButton,QUIT);
 }
 
 void GameController::drawMainMenu()
 {
-    mainMenu.drawMenu(screenSurface);
+    mainMenu.drawMenu(gameRenderer);
 }
 
 void GameController::keyboard(Player& currentPlayer){
@@ -157,32 +155,12 @@ void GameController::keyboard(Player& currentPlayer){
         currentPlayer.gameObjectRect.y += 9;
     }
 }
-
-SDL_Surface* GameController::loadSurface( std::string path )
+SDL_Surface* GameController::loadSurface(std::string path)
 {
+    SDL_Surface *loadSurface = SDL_LoadBMP(path.c_str());
 
-    SDL_Surface* optimizedSurface = NULL;
+    return loadSurface;
 
-    //Load image at specified path
-    SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
-    if( loadedSurface == NULL )
-    {
-        cout << "Unable to load image " << path << endl <<
-                "SDL Error: " << SDL_GetError();
-    }else
-	{
-		//Convert surface to screen format
-		optimizedSurface = SDL_ConvertSurface( loadedSurface, screenSurface->format, NULL );
-		if( optimizedSurface == NULL )
-		{
-			cout << "Unable to optimize image " << path << endl << "SDL ERROR : " << SDL_GetError();
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
-
-	return optimizedSurface;
 }
 
 
@@ -224,15 +202,15 @@ bool GameController::loadMedia()
 void GameController::setupObjects(){
 
     //Initializes starting locations for paddles
-    playerOne.setSurface(gameImages[BLUE_PADDLE]);
+    playerOne.setTexture(gameImages[BLUE_PADDLE],gameRenderer);
     playerOne.gameObjectRect.y = 0;
     playerOne.gameObjectRect.x = SPRITE_SIZE;
 
     playerOne.setScoreSide(LEFT);
-    playerOne.setScore(1, gameImages[NUMBER_ONE]);
+    playerOne.setScore(1, gameImages[NUMBER_ONE],gameRenderer);
 
 
-    playerTwo.setSurface(gameImages[RED_PADDLE]);
+    playerTwo.setTexture(gameImages[RED_PADDLE],gameRenderer);
     playerTwo.gameObjectRect.y = 0;
     playerTwo.gameObjectRect.x = SCREEN_WIDTH - 2*SPRITE_SIZE;
 
@@ -244,7 +222,7 @@ void GameController::setupObjects(){
 void GameController::runGame(){
 
     //loads a default image to prevent drawing issues should load checks somehow fail. Testing purposes only.
-    currentImage = gameImages[RED_PADDLE];
+//    currentImage = gameImages[RED_PADDLE];
 
     //Game Loop
     while(quit == false){
@@ -254,7 +232,7 @@ void GameController::runGame(){
 
         keyboard(playerTwo);
 
-        SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0x00, 0x00, 0x00 ) );
+        SDL_RenderClear(gameRenderer);
 
         applySurface(playerOne);
         applySurface(playerTwo);
@@ -266,7 +244,7 @@ void GameController::runGame(){
             quit = true;
         }*/
 
-        SDL_UpdateWindowSurface(gameWindow);
+        SDL_RenderPresent(gameRenderer);
 
         SDL_Delay(17);
     }
@@ -275,7 +253,7 @@ void GameController::runGame(){
 void GameController::testGame(){
 
     //loads a default image to prevent drawing issues should load checks somehow fail. Testing purposes only.
-    currentImage = gameImages[RED_PADDLE];
+//    currentImage = gameImages[RED_PADDLE];
 
     //Game Loop
     while(quit == false){
@@ -285,7 +263,7 @@ void GameController::testGame(){
 
         keyboard(playerTwo);
 
-        SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0x00, 0x00, 0x00 ) );
+//        SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0x00, 0x00, 0x00 ) );
 
         applySurface(playerOne);
         applySurface(playerTwo);
@@ -297,5 +275,5 @@ void GameController::testGame(){
 
 void GameController::applySurface(GameObject& updatedObject)
 {
-    SDL_BlitSurface(updatedObject.getSurface(), NULL, screenSurface, &updatedObject.gameObjectRect);
+    SDL_RenderCopy(gameRenderer,updatedObject.getTexture(),NULL,&updatedObject.gameObjectRect);
 }

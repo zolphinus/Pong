@@ -32,10 +32,10 @@ void Player::setScoreSide(Score_Side newSide)
     myScore.setSide(newSide);
 }
 
-void Player::setScore(int newValue, SDL_Surface* newScoreImage){
+void Player::setScore(int newValue, SDL_Surface* newScoreImage,SDL_Renderer *renderer){
 
     myScore.setScoreValue(newValue);
-    myScore.setScoreImage(newScoreImage);
+    myScore.setScoreImage(newScoreImage,renderer);
 }
 
 int Player::getScoreValue()
@@ -43,7 +43,7 @@ int Player::getScoreValue()
     return myScore.getScoreValue();
 }
 
-SDL_Surface* Player::getScoreImage()
+SDL_Texture* Player::getScoreImage()
 {
     return myScore.getScoreImage();
 }

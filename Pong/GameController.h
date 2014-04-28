@@ -1,9 +1,7 @@
 #ifndef GAME_CONTROLLER
 #define GAME_CONTROLLER
 #include "GameConfig.h"
-#include <iostream>
 #include "MenuController.h"
-#include "Button.h"
 
 
 
@@ -24,10 +22,11 @@ protected:
 
 private:
     SDL_Window* gameWindow;
-    SDL_Surface* screenSurface;
+    /*SDL_Surface* screenSurface;
     SDL_Surface* backSurface;
     SDL_Surface* currentImage;
-    SDL_Surface* tempSurface;
+    SDL_Surface* tempSurface;*/
+    SDL_Renderer *gameRenderer;
     Uint8 *keystate; //smoother keyboard interactions
 
     //Game Objects

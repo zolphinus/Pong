@@ -9,12 +9,12 @@ class GameObject{
 public:
     GameObject();
     ~GameObject();
-    SDL_Surface* getSurface();
-    void setSurface(SDL_Surface*);
+    SDL_Texture* getTexture();
+    void setTexture(SDL_Surface *,SDL_Renderer *);
     SDL_Rect gameObjectRect;
 
 protected:
-    SDL_Surface* gameObjectSurface;
+    SDL_Texture* gameObjectTexture;
 
 };
 
