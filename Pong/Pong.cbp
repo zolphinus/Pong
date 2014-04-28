@@ -46,7 +46,6 @@
 		<Unit filename="Main.cpp" />
 		<Unit filename="MenuController.cpp" />
 		<Unit filename="MenuController.h" />
-		<Unit filename="Paddle.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
 		<Unit filename="Score.cpp" />

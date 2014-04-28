@@ -7,7 +7,7 @@ using std::endl;
 
 
 
-GameController::GameController() : upPressed(false),downPressed(false)
+GameController::GameController() : upPressed(false),downPressed(false),timeCounter(0)
 {
     initGame();
 }
@@ -51,6 +51,9 @@ void GameController::initGame(){
                 //creating our window
         gameWindow = SDL_CreateWindow("PONG", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                   SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+
+        gameRenderer = SDL_CreateRenderer(gameWindow,-1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
         if( gameWindow == NULL ){
             cout << "Window could not be created! " << SDL_GetError();
         }
@@ -259,6 +262,7 @@ void GameController::runGame(){
         applySurface(playerOne);
         applySurface(playerTwo);
 
+
         /*drawMainMenu();
 
         /*if(mainMenu.mouseCheck() == QUIT)
@@ -266,9 +270,20 @@ void GameController::runGame(){
             quit = true;
         }*/
 
-        SDL_UpdateWindowSurface(gameWindow);
+        SDL_RenderPresent(gameRenderer);
 
-        SDL_Delay(17);
+        //SDL_UpdateWindowSurface(gameWindow);
+
+        /*if(1000 - timeCounter > 17)
+        {
+            SDL_Delay(17);
+            timeCounter += 17;
+        }
+        else
+        {
+            SDL_Delay(1000-timeCounter);
+            timeCounter = 0;
+        }*/
     }
 }
 
@@ -297,5 +312,6 @@ void GameController::testGame(){
 
 void GameController::applySurface(GameObject& updatedObject)
 {
-    SDL_BlitSurface(updatedObject.getSurface(), NULL, screenSurface, &updatedObject.gameObjectRect);
+    //SDL_BlitSurface(updatedObject.getSurface(), NULL, screenSurface, &updatedObject.gameObjectRect);
+
 }
