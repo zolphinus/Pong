@@ -2,6 +2,8 @@
 
 Player::Player(){
     isAI = false;
+    upPressed = false;
+    downPressed = false;
 }
 
 Player::~Player(){
@@ -53,4 +55,22 @@ Score& Player::getMyScore()
     return myScore;
 }
 
+void Player::setDownPressed(bool newPress)
+{
+    this->downPressed = newPress;
+}
 
+void Player::setUpPressed(bool newPress)
+{
+    this->upPressed = newPress;
+}
+
+bool Player::getDownPressed()
+{
+    return this->downPressed;
+}
+
+bool Player::getUpPressed()
+{
+    return this->upPressed;
+}

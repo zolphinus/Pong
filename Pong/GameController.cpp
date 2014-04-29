@@ -7,7 +7,7 @@ using std::endl;
 
 
 
-GameController::GameController() : upPressed(false),downPressed(false)
+GameController::GameController()
 {
     initGame();
 }
@@ -87,11 +87,8 @@ void GameController::drawMainMenu()
     mainMenu.drawMenu(gameRenderer);
 }
 
-void GameController::keyboard(Player& currentPlayer){
+void GameController::keyboard(Player& currentPlayer, int key_up,  int key_down){
     //Handle events on queue
-
-    SDL_Event e;
-
 
 
     while( SDL_PollEvent( &e ) != 0 )
@@ -102,63 +99,58 @@ void GameController::keyboard(Player& currentPlayer){
             quit = true;
         }
         //User presses a key
-        else if( e.type == SDL_KEYDOWN )
+        else if( e.type == SDL_KEYDOWN)
         {
-            //Select surfaces based on key press
-            switch( e.key.keysym.sym )
+            if( e.key.keysym.sym  == key_up)
             {
-                case SDLK_UP:
-                upPressed = true;
-                break;
-
-                case SDLK_DOWN:
-                downPressed = true;
-                break;
-
-                case SDLK_LEFT:
-                break;
-
-                case SDLK_RIGHT:
-                break;
-
-                case SDLK_ESCAPE:
-                quit = true;
-                break;
-
-                default:
-                cout << "NOPE" << endl;
-                break;
+                currentPlayer.setUpPressed(true);
             }
 
+            if( e.key.keysym.sym  == key_down)
+            {
+                currentPlayer.setDownPressed(true);
+            }
+
+            if( e.key.keysym.sym  == SDLK_ESCAPE)
+            {
+                quit = true;
+            }
         }
         else if(e.type == SDL_KEYUP)
         {
-            switch( e.key.keysym.sym )
+            if( e.key.keysym.sym  == key_up)
             {
-                case SDLK_UP:
-                upPressed = false;
-                break;
+                currentPlayer.setUpPressed(false);
+            }
 
-                case SDLK_DOWN:
-                downPressed = false;
-                break;
+            if( e.key.keysym.sym  == key_down)
+            {
+                currentPlayer.setDownPressed(false);
             }
         }
-    }
+    }//while
 
-    if(upPressed)
+
+    if(currentPlayer.getUpPressed() == true)
     {
         currentPlayer.gameObjectRect.y -= 9;
     }
 
-    if(downPressed)
+    if(currentPlayer.getDownPressed() == true)
     {
         currentPlayer.gameObjectRect.y += 9;
     }
+
 }
 SDL_Surface* GameController::loadSurface(std::string path)
 {
     SDL_Surface *loadSurface = SDL_LoadBMP(path.c_str());
+    if( loadSurface == NULL )
+    {
+        cout << "Unable to load image " << path << endl <<
+                "SDL Error: " << SDL_GetError();
+    }
+
 
     return loadSurface;
 
@@ -227,11 +219,17 @@ void GameController::runGame(){
 
     //Game Loop
     while(quit == false){
+            startMultiplayer();
 
         //Input from players
-        keyboard(playerOne);
 
-        keyboard(playerTwo);
+        /*
+        keyboard(playerOne, SDLK_UP, SDLK_DOWN);
+
+
+
+
+        keyboard(playerTwo, SDLK_LEFT, SDLK_RIGHT);
 
         SDL_RenderClear(gameRenderer);
 
@@ -243,14 +241,16 @@ void GameController::runGame(){
         /*if(mainMenu.mouseCheck() == QUIT)
         {
             quit = true;
-        }*/
+        }
 
         SDL_RenderPresent(gameRenderer);
 
         SDL_Delay(17);
+
+        */
     }
 }
-
+/*
 void GameController::testGame(){
 
     //loads a default image to prevent drawing issues should load checks somehow fail. Testing purposes only.
@@ -273,8 +273,147 @@ void GameController::testGame(){
         SDL_UpdateWindowSurface(gameWindow);
     }
 }
+*/
 
 void GameController::applySurface(GameObject& updatedObject)
 {
     SDL_RenderCopy(gameRenderer,updatedObject.getTexture(),NULL,&updatedObject.gameObjectRect);
+}
+
+
+void GameController::startMultiplayer()
+{
+    while(quit == false){
+
+        //Input from players
+
+        SDL_RenderClear(gameRenderer);
+
+        //First player actions
+        while( SDL_PollEvent( &e ) != 0 ){
+
+        //User requests quit
+        if( e.type == SDL_QUIT )
+        {
+            quit = true;
+        }
+        //User presses a key
+        else if( e.type == SDL_KEYDOWN)
+        {
+            if( e.key.keysym.sym  == SDLK_UP)
+            {
+                playerOne.setUpPressed(true);
+            }
+
+            if( e.key.keysym.sym  == SDLK_DOWN)
+            {
+                playerOne.setDownPressed(true);
+            }
+
+            if( e.key.keysym.sym  == SDLK_ESCAPE)
+            {
+                quit = true;
+            }
+        }
+        else if(e.type == SDL_KEYUP)
+        {
+            if( e.key.keysym.sym  == SDLK_UP)
+            {
+                playerOne.setUpPressed(false);
+            }
+
+            if( e.key.keysym.sym  == SDLK_DOWN)
+            {
+                playerOne.setDownPressed(false);
+            }
+        }
+
+    //second player actions
+        //User requests quit
+        if( e.type == SDL_QUIT )
+        {
+            quit = true;
+        }
+        //User presses a key
+        else if( e.type == SDL_KEYDOWN)
+        {
+            if( e.key.keysym.sym  == SDLK_w)
+            {
+                playerTwo.setUpPressed(true);
+            }
+
+            if( e.key.keysym.sym  == SDLK_s)
+            {
+                playerTwo.setDownPressed(true);
+            }
+
+            if( e.key.keysym.sym  == SDLK_ESCAPE)
+            {
+                quit = true;
+            }
+        }
+        else if(e.type == SDL_KEYUP)
+        {
+            if( e.key.keysym.sym  == SDLK_w)
+            {
+                playerTwo.setUpPressed(false);
+            }
+
+            if( e.key.keysym.sym  == SDLK_s)
+            {
+                playerTwo.setDownPressed(false);
+            }
+        }
+    }//while
+
+
+    if(playerOne.getUpPressed() == true)
+    {
+        playerOne.gameObjectRect.y -= 9;
+    }
+
+    if(playerOne.getDownPressed() == true)
+    {
+        playerOne.gameObjectRect.y += 9;
+    }
+
+
+
+    if(playerTwo.getUpPressed() == true)
+    {
+        playerTwo.gameObjectRect.y -= 9;
+    }
+
+    if(playerTwo.getDownPressed() == true)
+    {
+        playerTwo.gameObjectRect.y += 9;
+    }
+
+
+    if(playerOne.gameObjectRect.y < 0)
+    {
+        playerOne.gameObjectRect.y = 0;
+    }
+
+    if(playerOne.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
+    {
+        playerOne.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
+    }
+
+    if(playerTwo.gameObjectRect.y < 0)
+    {
+        playerTwo.gameObjectRect.y = 0;
+    }
+
+    if(playerTwo.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
+    {
+        playerTwo.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
+    }
+
+
+        applySurface(playerOne);
+        applySurface(playerTwo);
+        SDL_RenderPresent(gameRenderer);
+}
+
 }

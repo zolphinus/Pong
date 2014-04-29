@@ -20,6 +20,7 @@ protected:
 
     void applySurface(GameObject&);
 
+
 private:
     SDL_Window* gameWindow;
     /*SDL_Surface* screenSurface;
@@ -33,6 +34,8 @@ private:
     Player playerOne;
     Player playerTwo;
 
+    SDL_Event e;
+
     //Menu objects
     MenuController mainMenu, pauseMenu;
 
@@ -41,12 +44,13 @@ private:
 
     bool quit;
 
-    bool upPressed,downPressed;
 
     void initGame();
-    void keyboard(Player&);
+    void keyboard(Player&, int, int);
     void close();
     void setupObjects();
+
+    void startMultiplayer();
 
 
     void initMainMenu();
