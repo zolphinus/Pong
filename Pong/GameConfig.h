@@ -8,6 +8,8 @@ const int SPRITE_SIZE = 32;
 #include <vector>
 #include <iostream>
 #include <SDL.h>
+#include <stdlib.h>
+#include <ctime>
 
 enum ImagesLoaded
 {
@@ -17,6 +19,7 @@ enum ImagesLoaded
     RED_PADDLE,
     TEST_BUTTON,
     NUMBER_ONE,
+    BALL,
     IMAGE_LOADED_TOTAL
 };
 

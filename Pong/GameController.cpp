@@ -36,6 +36,7 @@ void GameController::initGame(){
 
     gameWindow = NULL;
     quit = false;
+    srand(time(NULL));
 
     //error check for initialization
     if( SDL_Init(SDL_INIT_VIDEO) < 0){
