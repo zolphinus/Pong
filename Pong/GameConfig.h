@@ -14,6 +14,7 @@ enum ImagesLoaded
     BLUE_PADDLE,
     RED_PADDLE,
     TEST_BUTTON,
+    BALL,
     IMAGE_LOADED_TOTAL
 };
 
