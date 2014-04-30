@@ -22,10 +22,6 @@ protected:
 
 private:
     SDL_Window* gameWindow;
-    /*SDL_Surface* screenSurface;
-    SDL_Surface* backSurface;
-    SDL_Surface* currentImage;
-    SDL_Surface* tempSurface;*/
     SDL_Renderer *gameRenderer;
     Uint8 *keystate; //smoother keyboard interactions
 
@@ -54,6 +50,11 @@ private:
 
     void drawMainMenu();
     void drawPauseMenu();
+
+    bool collision_point(int, int, GameObject);
+    bool collision_line(int, int, int, int, GameObject);
+    bool place_meeting(int, int, GameObject, GameObject);
+    double point_distance(int, int, int, int);
 
     bool loadMedia();
     SDL_Surface* loadSurface(std::string);

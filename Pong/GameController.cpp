@@ -61,6 +61,12 @@ void GameController::initGame(){
 
         }
 
+        int imgFlags = IMG_INIT_JPG | IMG_INIT_PNG;
+        if(IMG_Init(imgFlags) != imgFlags)
+        {
+            cout << "SDL_image failed to initialize: " << IMG_GetError();
+        }
+
         bool mediaLoaded = loadMedia();
 
         if(mediaLoaded == false)
@@ -91,20 +97,18 @@ void GameController::keyboard(Player& currentPlayer){
 
     SDL_Event e;
 
-
-
-    while( SDL_PollEvent( &e ) != 0 )
+    while(SDL_PollEvent(&e) != 0)
     {
         //User requests quit
-        if( e.type == SDL_QUIT )
+        if(e.type == SDL_QUIT)
         {
             quit = true;
         }
         //User presses a key
-        else if( e.type == SDL_KEYDOWN )
+        else if(e.type == SDL_KEYDOWN)
         {
             //Select surfaces based on key press
-            switch( e.key.keysym.sym )
+            switch(e.key.keysym.sym)
             {
                 case SDLK_UP:
                 upPressed = true;
@@ -112,12 +116,6 @@ void GameController::keyboard(Player& currentPlayer){
 
                 case SDLK_DOWN:
                 downPressed = true;
-                break;
-
-                case SDLK_LEFT:
-                break;
-
-                case SDLK_RIGHT:
                 break;
 
                 case SDLK_ESCAPE:
@@ -132,7 +130,7 @@ void GameController::keyboard(Player& currentPlayer){
         }
         else if(e.type == SDL_KEYUP)
         {
-            switch( e.key.keysym.sym )
+            switch(e.key.keysym.sym)
             {
                 case SDLK_UP:
                 upPressed = false;
@@ -149,7 +147,6 @@ void GameController::keyboard(Player& currentPlayer){
     {
         currentPlayer.gameObjectRect.y -= 9;
     }
-
     if(downPressed)
     {
         currentPlayer.gameObjectRect.y += 9;
@@ -157,12 +154,11 @@ void GameController::keyboard(Player& currentPlayer){
 }
 SDL_Surface* GameController::loadSurface(std::string path)
 {
-    SDL_Surface *loadSurface = SDL_LoadBMP(path.c_str());
+    SDL_Surface *loadSurface = IMG_Load(path.c_str());
 
     return loadSurface;
 
 }
-
 
 bool GameController::loadMedia()
 {
@@ -190,7 +186,7 @@ bool GameController::loadMedia()
         return false;
     }
 
-    gameImages[TEST_BUTTON] = loadSurface("images/Green_button.bmp");
+    gameImages[TEST_BUTTON] = loadSurface("images/Green_button.png");
     if(gameImages[TEST_BUTTON] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
@@ -221,9 +217,6 @@ void GameController::setupObjects(){
 
 void GameController::runGame(){
 
-    //loads a default image to prevent drawing issues should load checks somehow fail. Testing purposes only.
-//    currentImage = gameImages[RED_PADDLE];
-
     //Game Loop
     while(quit == false){
 
@@ -237,23 +230,13 @@ void GameController::runGame(){
         applySurface(playerOne);
         applySurface(playerTwo);
 
-        /*drawMainMenu();
-
-        /*if(mainMenu.mouseCheck() == QUIT)
-        {
-            quit = true;
-        }*/
-
         SDL_RenderPresent(gameRenderer);
-
-        SDL_Delay(17);
     }
 }
 
 void GameController::testGame(){
 
-    //loads a default image to prevent drawing issues should load checks somehow fail. Testing purposes only.
-//    currentImage = gameImages[RED_PADDLE];
+    //Used for testing
 
     //Game Loop
     while(quit == false){
@@ -262,8 +245,6 @@ void GameController::testGame(){
         keyboard(playerOne);
 
         keyboard(playerTwo);
-
-//        SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0x00, 0x00, 0x00 ) );
 
         applySurface(playerOne);
         applySurface(playerTwo);
@@ -276,4 +257,45 @@ void GameController::testGame(){
 void GameController::applySurface(GameObject& updatedObject)
 {
     SDL_RenderCopy(gameRenderer,updatedObject.getTexture(),NULL,&updatedObject.gameObjectRect);
+}
+
+bool GameController::place_meeting(int checkX, int checkY, GameObject startObject, GameObject checkObject)
+{
+    SDL_Rect startRect = startObject.gameObjectRect;
+    if(collision_line(startRect.x,startRect.y,startRect.x+startRect.w,startRect.y,checkObject) || //top line
+       collision_line(startRect.x,startRect.y,startRect.x,startRect.y+startRect.h,checkObject) || //left line
+       collision_line(startRect.x+startRect.w,startRect.y,startRect.x+startRect.w,startRect.y+startRect.h,checkObject) || //right line
+       collision_line(startRect.x,startRect.y+startRect.h,startRect.x+startRect.w,startRect.y+startRect.h,checkObject))//bottom line
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool GameController::collision_line(int startX, int startY, int endX, int endY, GameObject checkObject)
+{
+    double checkAngle = atan2(endX-startX,endY-startY);
+    int checkDistance = point_distance(startX,startY,endX,endY);
+    cout << "Angle: " << checkAngle << endl;
+    cout << "Distance: " << checkDistance << endl;
+    return false;
+}
+
+bool GameController::collision_point(int checkX, int checkY, GameObject checkObject)
+{
+    SDL_Rect checkRect = checkObject.gameObjectRect;
+
+    if(checkX > checkRect.x && checkX < checkRect.x + checkRect.w && checkY > checkRect.y && checkY < checkRect.y + checkRect.h)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+double GameController::point_distance(int x1, int y1, int x2, int y2)
+{
+    double distance = sqrt(pow(x2-x1,2)+pow(y2-y1,2));
+    return distance;
 }
