@@ -9,12 +9,9 @@ const int SPRITE_SIZE = 32;
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
-<<<<<<< HEAD
 #include <cmath>
-=======
 #include <stdlib.h>
 #include <ctime>
->>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
 
 enum ImagesLoaded
 {

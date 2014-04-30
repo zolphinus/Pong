@@ -384,23 +384,25 @@
 1398577429 source:c:\users\zolphinus\documents\github\pong\pong\score.cpp
 	"GameConfig.h"
 
-1398889244 source:c:\users\conor\documents\github\pong\pong\gamecontroller.cpp
+1398890040 source:c:\users\conor\documents\github\pong\pong\gamecontroller.cpp
 	"GameController.h"
-	<iostream>
 
-1398889084 c:\users\conor\documents\github\pong\pong\gamecontroller.h
+1398889864 c:\users\conor\documents\github\pong\pong\gamecontroller.h
 	"GameConfig.h"
 	"MenuController.h"
 
-1398889042 c:\users\conor\documents\github\pong\pong\gameconfig.h
+1398889928 c:\users\conor\documents\github\pong\pong\gameconfig.h
 	<vector>
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 	<cmath>
+	<stdlib.h>
+	<ctime>
 	"GameObject.h"
 	"Score.h"
 	"Player.h"
+	"Ball.h"
 
 1398730755 c:\users\conor\documents\github\pong\pong\gameobject.h
 	<SDL.h>
@@ -444,17 +446,17 @@
 1398575041 source:c:\users\zolphinus\documents\github\pong\pong\menucontroller.cpp
 	"MenuController.h"
 
-1398730755 c:\users\conor\documents\github\pong\pong\score.h
+1398889864 c:\users\conor\documents\github\pong\pong\score.h
 	<SDL.h>
 
-1398730755 c:\users\conor\documents\github\pong\pong\player.h
+1398889864 c:\users\conor\documents\github\pong\pong\player.h
 	"GameConfig.h"
 	"Score.h"
 
-1398730755 source:c:\users\conor\documents\github\pong\pong\player.cpp
+1398889864 source:c:\users\conor\documents\github\pong\pong\player.cpp
 	"Player.h"
 
-1398730755 source:c:\users\conor\documents\github\pong\pong\score.cpp
+1398889864 source:c:\users\conor\documents\github\pong\pong\score.cpp
 	"GameConfig.h"
 
 1376156342 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_image.h
@@ -462,4 +464,8 @@
 	"SDL_version.h"
 	"begin_code.h"
 	"close_code.h"
+
+1398889864 c:\users\conor\documents\github\pong\pong\ball.h
+	"GameConfig.h"
+	"GameObject.h"
 
