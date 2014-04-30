@@ -243,6 +243,12 @@ bool GameController::loadMedia()
         return false;
     }
 
+    gameImages[BALL] = loadSurface("images/ball.bmp");
+    if(gameImages[BALL] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
     return success;
 }
 
@@ -263,6 +269,11 @@ void GameController::setupObjects(){
 
     playerTwo.setScoreSide(RIGHT);
     playerTwo.setScore(0, gameImages[NUMBER_ZERO],gameRenderer);
+
+
+    ball.setTexture(gameImages[BALL], gameRenderer);
+    ball.gameObjectRect.y = SCREEN_HEIGHT/2 - ball.gameObjectRect.h/2;
+    ball.gameObjectRect.x = SCREEN_WIDTH/2 - ball.gameObjectRect.w/2;
 }
 
 
@@ -289,6 +300,7 @@ void GameController::runGame(){
 
         applySurface(playerOne);
         applySurface(playerTwo);
+        applySurface(ball);
 
         /*drawMainMenu();
 

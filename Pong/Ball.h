@@ -12,21 +12,15 @@ public:
     ~Ball();
     int getXVelocity();
     int getYVelocity();
-    int getXPosition();
-    int getYPosition();
     void setXVelocity(int newValue);
     void setYVelocity(int newValue);
-    void setXPosition(int newValue);
-    void setYPosition(int newValue);
     void bounce();
 
 
 private:
     int
     XVelocity,
-    YVelocity,
-    XPosition,
-    YPosition;
+    YVelocity;
 };
 
 #endif // BALL_H_INCLUDED

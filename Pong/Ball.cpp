@@ -21,16 +21,6 @@ int Ball::getYVelocity()
     return YVelocity;
 }
 
-int Ball::getXPosition()
-{
-    return XPosition;
-}
-
-int Ball::getYPosition()
-{
-    return YPosition;
-}
-
 void Ball::setXVelocity(int newValue)
 {
     XVelocity = newValue;
@@ -39,16 +29,6 @@ void Ball::setXVelocity(int newValue)
 void Ball::setYVelocity(int newValue)
 {
     YVelocity = newValue;
-}
-
-void Ball::setXPosition(int newValue)
-{
-    XPosition=newValue;
-}
-
-void Ball::setYPosition(int newValue)
-{
-    YPosition=newValue;
 }
 
 void Ball::bounce()

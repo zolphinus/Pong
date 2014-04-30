@@ -60,6 +60,7 @@ enum buttonEvent
 #include "GameObject.h"
 #include "Score.h"
 #include "Player.h"
+#include "Ball.h"
 
 
 

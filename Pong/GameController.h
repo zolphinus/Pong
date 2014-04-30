@@ -33,6 +33,7 @@ private:
     //Game Objects
     Player playerOne;
     Player playerTwo;
+    Ball   ball;
 
     SDL_Event e;
 
