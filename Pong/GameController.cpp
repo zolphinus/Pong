@@ -1,5 +1,4 @@
 #include "GameController.h"
-#include <iostream>
 
 using std::cout;
 using std::cin;
@@ -19,7 +18,9 @@ GameController::~GameController(){
 void GameController::close(){
 
     //Automatically releases memory and stops SDL
-    SDL_DestroyWindow( gameWindow );
+    SDL_DestroyWindow(gameWindow);
+    SDL_DestroyRenderer(gameRenderer);
+
     SDL_Quit();
 }
 
@@ -284,162 +285,105 @@ void GameController::setupObjects(){
 }
 
 
-void GameController::runGame(){
-
-    //loads a default image to prevent drawing issues should load checks somehow fail. Testing purposes only.
-//    currentImage = gameImages[RED_PADDLE];
-
+void GameController::runGame()
+{
     //Game Loop
-    while(quit == false){
-            startMultiplayer();
-
-        //Input from players
-
-        /*
-        keyboard(playerOne, SDLK_UP, SDLK_DOWN);
-
-
-
-
-        keyboard(playerTwo, SDLK_LEFT, SDLK_RIGHT);
-
-        SDL_RenderClear(gameRenderer);
-
-        applySurface(playerOne);
-        applySurface(playerTwo);
-        applySurface(ball);
-
-        /*drawMainMenu();
-
-        /*if(mainMenu.mouseCheck() == QUIT)
-        {
-            quit = true;
-        }
-
-        SDL_RenderPresent(gameRenderer);
-
-        SDL_Delay(17);
-
-        */
+    while(quit == false)
+    {
+        startMultiplayer();
     }
 }
-/*
-void GameController::testGame(){
-
-    //loads a default image to prevent drawing issues should load checks somehow fail. Testing purposes only.
-//    currentImage = gameImages[RED_PADDLE];
-
-    //Game Loop
-    while(quit == false){
-
-        //Input from players
-        keyboard(playerOne);
-
-        keyboard(playerTwo);
-
-//        SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0x00, 0x00, 0x00 ) );
-
-        applySurface(playerOne);
-        applySurface(playerTwo);
-        applySurface(playerOne.getMyScore());
-
-        SDL_UpdateWindowSurface(gameWindow);
-    }
-}
-*/
 
 void GameController::applyTexture(GameObject& updatedObject)
 {
     SDL_RenderCopy(gameRenderer,updatedObject.getTexture(),NULL,&updatedObject.gameObjectRect);
 }
 
-
 void GameController::startMultiplayer()
 {
-    while(quit == false){
-
-
-
+    while(quit == false)
+    {
         //Input from players
 
         SDL_RenderClear(gameRenderer);
 
         //First player actions
-        while( SDL_PollEvent( &e ) != 0 ){
-
-        //User requests quit
-        if( e.type == SDL_QUIT )
+        while( SDL_PollEvent( &e ) != 0 )
         {
-            quit = true;
-        }
-        //User presses a key
-        else if( e.type == SDL_KEYDOWN)
-        {
-            if( e.key.keysym.sym  == SDLK_UP)
-            {
-                playerOne.setUpPressed(true);
-            }
 
-            if( e.key.keysym.sym  == SDLK_DOWN)
-            {
-                playerOne.setDownPressed(true);
-            }
-
-            if( e.key.keysym.sym  == SDLK_ESCAPE)
+            //User requests quit
+            if( e.type == SDL_QUIT )
             {
                 quit = true;
             }
-        }
-        else if(e.type == SDL_KEYUP)
-        {
-            if( e.key.keysym.sym  == SDLK_UP)
+            //User presses a key
+            else if( e.type == SDL_KEYDOWN)
             {
-                playerOne.setUpPressed(false);
+                if( e.key.keysym.sym  == SDLK_UP)
+                {
+                    playerOne.setUpPressed(true);
+                }
+
+                if( e.key.keysym.sym  == SDLK_DOWN)
+                {
+                    playerOne.setDownPressed(true);
+                }
+
+                if( e.key.keysym.sym  == SDLK_ESCAPE)
+                {
+                    quit = true;
+                }
+            }
+            else if(e.type == SDL_KEYUP)
+            {
+                if( e.key.keysym.sym  == SDLK_UP)
+                {
+                    playerOne.setUpPressed(false);
+                }
+
+                if( e.key.keysym.sym  == SDLK_DOWN)
+                {
+                    playerOne.setDownPressed(false);
+                }
             }
 
-            if( e.key.keysym.sym  == SDLK_DOWN)
-            {
-                playerOne.setDownPressed(false);
-            }
-        }
-
-    //second player actions
-        //User requests quit
-        if( e.type == SDL_QUIT )
-        {
-            quit = true;
-        }
-        //User presses a key
-        else if( e.type == SDL_KEYDOWN)
-        {
-            if( e.key.keysym.sym  == SDLK_w)
-            {
-                playerTwo.setUpPressed(true);
-            }
-
-            if( e.key.keysym.sym  == SDLK_s)
-            {
-                playerTwo.setDownPressed(true);
-            }
-
-            if( e.key.keysym.sym  == SDLK_ESCAPE)
+        //second player actions
+            //User requests quit
+            if( e.type == SDL_QUIT )
             {
                 quit = true;
             }
-        }
-        else if(e.type == SDL_KEYUP)
-        {
-            if( e.key.keysym.sym  == SDLK_w)
+            //User presses a key
+            else if( e.type == SDL_KEYDOWN)
             {
-                playerTwo.setUpPressed(false);
-            }
+                if( e.key.keysym.sym  == SDLK_w)
+                {
+                    playerTwo.setUpPressed(true);
+                }
 
-            if( e.key.keysym.sym  == SDLK_s)
-            {
-                playerTwo.setDownPressed(false);
+                if( e.key.keysym.sym  == SDLK_s)
+                {
+                    playerTwo.setDownPressed(true);
+                }
+
+                if( e.key.keysym.sym  == SDLK_ESCAPE)
+                {
+                    quit = true;
+                }
             }
-        }
-    }//while
+            else if(e.type == SDL_KEYUP)
+            {
+                if( e.key.keysym.sym  == SDLK_w)
+                {
+                    playerTwo.setUpPressed(false);
+                }
+
+                if( e.key.keysym.sym  == SDLK_s)
+                {
+                    playerTwo.setDownPressed(false);
+                }
+            }
+        }//while
 
 
     if(playerOne.getUpPressed() == true)
@@ -496,6 +440,6 @@ void GameController::startMultiplayer()
 
 
         SDL_RenderPresent(gameRenderer);
-}
+    }
 
 }
