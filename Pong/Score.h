@@ -15,6 +15,7 @@ public:
     void setScoreValue(int newScore);
     void setScoreImage(SDL_Surface *,SDL_Renderer *);
     void resetScore();
+    void setTexture(SDL_Surface *,SDL_Renderer *);
 
     SDL_Texture* getScoreImage();
     int getScoreValue();

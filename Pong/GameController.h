@@ -18,7 +18,7 @@ public:
 
 protected:
 
-    void applySurface(GameObject&);
+    void applyTexture(GameObject&);
 
 
 private:

@@ -177,8 +177,62 @@ bool GameController::loadMedia()
         return false;
     }
 
-    gameImages[NUMBER_ONE] = loadSurface("images/red_paddle.bmp");
+    gameImages[NUMBER_ZERO] = loadSurface("images/zero.bmp");
+    if(gameImages[NUMBER_ZERO] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_ONE] = loadSurface("images/one.bmp");
     if(gameImages[NUMBER_ONE] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_TWO] = loadSurface("images/two.bmp");
+    if(gameImages[NUMBER_TWO] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_THREE] = loadSurface("images/three.bmp");
+    if(gameImages[NUMBER_THREE] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_FOUR] = loadSurface("images/four.bmp");
+    if(gameImages[NUMBER_FOUR] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_FIVE] = loadSurface("images/five.bmp");
+    if(gameImages[NUMBER_FIVE] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_SIX] = loadSurface("images/six.bmp");
+    if(gameImages[NUMBER_SIX] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_SEVEN] = loadSurface("images/seven.bmp");
+    if(gameImages[NUMBER_SEVEN] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_EIGHT] = loadSurface("images/eight.bmp");
+    if(gameImages[NUMBER_EIGHT] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_NINE] = loadSurface("images/nine.bmp");
+    if(gameImages[NUMBER_NINE] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
     }
@@ -196,19 +250,19 @@ void GameController::setupObjects(){
 
     //Initializes starting locations for paddles
     playerOne.setTexture(gameImages[BLUE_PADDLE],gameRenderer);
-    playerOne.gameObjectRect.y = 0;
+    playerOne.gameObjectRect.y = (SCREEN_HEIGHT / 2) - (playerOne.gameObjectRect.h /2);
     playerOne.gameObjectRect.x = SPRITE_SIZE;
 
     playerOne.setScoreSide(LEFT);
-    playerOne.setScore(1, gameImages[NUMBER_ONE],gameRenderer);
+    playerOne.setScore(0, gameImages[NUMBER_ZERO],gameRenderer);
 
 
     playerTwo.setTexture(gameImages[RED_PADDLE],gameRenderer);
-    playerTwo.gameObjectRect.y = 0;
+    playerTwo.gameObjectRect.y = (SCREEN_HEIGHT / 2) - (playerOne.gameObjectRect.h /2);
     playerTwo.gameObjectRect.x = SCREEN_WIDTH - 2*SPRITE_SIZE;
 
-//    playerTwo.setScoreSide(RIGHT);
-
+    playerTwo.setScoreSide(RIGHT);
+    playerTwo.setScore(0, gameImages[NUMBER_ZERO],gameRenderer);
 }
 
 
@@ -275,7 +329,7 @@ void GameController::testGame(){
 }
 */
 
-void GameController::applySurface(GameObject& updatedObject)
+void GameController::applyTexture(GameObject& updatedObject)
 {
     SDL_RenderCopy(gameRenderer,updatedObject.getTexture(),NULL,&updatedObject.gameObjectRect);
 }
@@ -284,6 +338,8 @@ void GameController::applySurface(GameObject& updatedObject)
 void GameController::startMultiplayer()
 {
     while(quit == false){
+
+
 
         //Input from players
 
@@ -410,9 +466,16 @@ void GameController::startMultiplayer()
         playerTwo.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
     }
 
+    //Score stuff for testing
+    //playerOne.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
+    //playerTwo.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
 
-        applySurface(playerOne);
-        applySurface(playerTwo);
+        applyTexture(playerOne);
+        applyTexture(playerTwo);
+        applyTexture(playerOne.getMyScore());
+        applyTexture(playerTwo.getMyScore());
+
+
         SDL_RenderPresent(gameRenderer);
 }
 
