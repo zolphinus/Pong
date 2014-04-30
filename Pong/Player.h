@@ -14,6 +14,10 @@ public:
     void resetScore();
     void setScoreSide(Score_Side);
     void setScore(int value, SDL_Surface* scoreImage,SDL_Renderer *);
+    void setUpPressed(bool);
+    void setDownPressed(bool);
+    bool getUpPressed();
+    bool getDownPressed();
 
 
     int getScoreValue();
@@ -22,10 +26,11 @@ public:
 
 
 
+
 private:
     bool isAI;
     Score myScore;
-
+    bool upPressed,downPressed;
 
 };
 

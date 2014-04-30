@@ -1,5 +1,4 @@
 #include "GameController.h"
-#include <iostream>
 
 using std::cout;
 using std::cin;
@@ -7,7 +6,7 @@ using std::endl;
 
 
 
-GameController::GameController() : upPressed(false),downPressed(false)
+GameController::GameController()
 {
     initGame();
 }
@@ -19,7 +18,9 @@ GameController::~GameController(){
 void GameController::close(){
 
     //Automatically releases memory and stops SDL
-    SDL_DestroyWindow( gameWindow );
+    SDL_DestroyWindow(gameWindow);
+    SDL_DestroyRenderer(gameRenderer);
+
     SDL_Quit();
 }
 
@@ -36,6 +37,7 @@ void GameController::initGame(){
 
     gameWindow = NULL;
     quit = false;
+    srand(time(NULL));
 
     //error check for initialization
     if( SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -62,9 +64,16 @@ void GameController::initGame(){
         }
 
         int imgFlags = IMG_INIT_JPG | IMG_INIT_PNG;
+<<<<<<< HEAD
         if(IMG_Init(imgFlags) != imgFlags)
         {
             cout << "SDL_image failed to initialize: " << IMG_GetError();
+=======
+
+        if(IMG_Init(imgFlags) != (imgFlags))
+        {
+            cout << "Image failed to intiialize." << IMG_GetError();
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
         }
 
         bool mediaLoaded = loadMedia();
@@ -92,12 +101,17 @@ void GameController::drawMainMenu()
     mainMenu.drawMenu(gameRenderer);
 }
 
-void GameController::keyboard(Player& currentPlayer){
+void GameController::keyboard(Player& currentPlayer, int key_up,  int key_down){
     //Handle events on queue
 
+<<<<<<< HEAD
     SDL_Event e;
 
     while(SDL_PollEvent(&e) != 0)
+=======
+
+    while( SDL_PollEvent( &e ) != 0 )
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
     {
         //User requests quit
         if(e.type == SDL_QUIT)
@@ -105,6 +119,7 @@ void GameController::keyboard(Player& currentPlayer){
             quit = true;
         }
         //User presses a key
+<<<<<<< HEAD
         else if(e.type == SDL_KEYDOWN)
         {
             //Select surfaces based on key press
@@ -119,42 +134,71 @@ void GameController::keyboard(Player& currentPlayer){
                 break;
 
                 case SDLK_ESCAPE:
-                quit = true;
-                break;
-
-                default:
-                cout << "NOPE" << endl;
-                break;
+=======
+        else if( e.type == SDL_KEYDOWN)
+        {
+            if( e.key.keysym.sym  == key_up)
+            {
+                currentPlayer.setUpPressed(true);
             }
 
+            if( e.key.keysym.sym  == key_down)
+            {
+                currentPlayer.setDownPressed(true);
+            }
+
+            if( e.key.keysym.sym  == SDLK_ESCAPE)
+            {
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
+                quit = true;
+            }
         }
         else if(e.type == SDL_KEYUP)
         {
+<<<<<<< HEAD
             switch(e.key.keysym.sym)
+=======
+            if( e.key.keysym.sym  == key_up)
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
             {
-                case SDLK_UP:
-                upPressed = false;
-                break;
+                currentPlayer.setUpPressed(false);
+            }
 
-                case SDLK_DOWN:
-                downPressed = false;
-                break;
+            if( e.key.keysym.sym  == key_down)
+            {
+                currentPlayer.setDownPressed(false);
             }
         }
-    }
+    }//while
 
-    if(upPressed)
+
+    if(currentPlayer.getUpPressed() == true)
     {
         currentPlayer.gameObjectRect.y -= 9;
     }
+<<<<<<< HEAD
     if(downPressed)
+=======
+
+    if(currentPlayer.getDownPressed() == true)
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
     {
         currentPlayer.gameObjectRect.y += 9;
     }
+
 }
 SDL_Surface* GameController::loadSurface(std::string path)
 {
     SDL_Surface *loadSurface = IMG_Load(path.c_str());
+<<<<<<< HEAD
+=======
+    if( loadSurface == NULL )
+    {
+        cout << "Unable to load image " << path << endl <<
+                "SDL Error: " << SDL_GetError();
+    }
+
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
 
     return loadSurface;
 
@@ -168,7 +212,7 @@ bool GameController::loadMedia()
 
     //Loads images into the Game Images array so that we can reuse them multiple times
     //without needing to re-open the files
-    gameImages[BLUE_PADDLE] = loadSurface("images/blue_paddle.bmp");
+    gameImages[BLUE_PADDLE] = loadSurface("images/blue_paddle.png");
     if(gameImages[BLUE_PADDLE] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
@@ -180,14 +224,78 @@ bool GameController::loadMedia()
         return false;
     }
 
-    gameImages[NUMBER_ONE] = loadSurface("images/red_paddle.bmp");
+    gameImages[NUMBER_ZERO] = loadSurface("images/zero.bmp");
+    if(gameImages[NUMBER_ZERO] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_ONE] = loadSurface("images/one.bmp");
     if(gameImages[NUMBER_ONE] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
     }
 
+<<<<<<< HEAD
     gameImages[TEST_BUTTON] = loadSurface("images/Green_button.png");
+=======
+    gameImages[NUMBER_TWO] = loadSurface("images/two.bmp");
+    if(gameImages[NUMBER_TWO] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_THREE] = loadSurface("images/three.bmp");
+    if(gameImages[NUMBER_THREE] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_FOUR] = loadSurface("images/four.bmp");
+    if(gameImages[NUMBER_FOUR] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_FIVE] = loadSurface("images/five.bmp");
+    if(gameImages[NUMBER_FIVE] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_SIX] = loadSurface("images/six.bmp");
+    if(gameImages[NUMBER_SIX] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_SEVEN] = loadSurface("images/seven.bmp");
+    if(gameImages[NUMBER_SEVEN] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_EIGHT] = loadSurface("images/eight.bmp");
+    if(gameImages[NUMBER_EIGHT] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[NUMBER_NINE] = loadSurface("images/nine.bmp");
+    if(gameImages[NUMBER_NINE] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[TEST_BUTTON] = loadSurface("images/Green_button.bmp");
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
     if(gameImages[TEST_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[BALL] = loadSurface("images/ball.bmp");
+    if(gameImages[BALL] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
     }
@@ -199,64 +307,201 @@ void GameController::setupObjects(){
 
     //Initializes starting locations for paddles
     playerOne.setTexture(gameImages[BLUE_PADDLE],gameRenderer);
-    playerOne.gameObjectRect.y = 0;
+    playerOne.gameObjectRect.y = (SCREEN_HEIGHT / 2) - (playerOne.gameObjectRect.h /2);
     playerOne.gameObjectRect.x = SPRITE_SIZE;
 
     playerOne.setScoreSide(LEFT);
-    playerOne.setScore(1, gameImages[NUMBER_ONE],gameRenderer);
+    playerOne.setScore(0, gameImages[NUMBER_ZERO],gameRenderer);
 
 
     playerTwo.setTexture(gameImages[RED_PADDLE],gameRenderer);
-    playerTwo.gameObjectRect.y = 0;
+    playerTwo.gameObjectRect.y = (SCREEN_HEIGHT / 2) - (playerOne.gameObjectRect.h /2);
     playerTwo.gameObjectRect.x = SCREEN_WIDTH - 2*SPRITE_SIZE;
 
-//    playerTwo.setScoreSide(RIGHT);
+    playerTwo.setScoreSide(RIGHT);
+    playerTwo.setScore(0, gameImages[NUMBER_ZERO],gameRenderer);
 
+
+    ball.setTexture(gameImages[BALL], gameRenderer);
+    ball.gameObjectRect.y = SCREEN_HEIGHT/2 - ball.gameObjectRect.h/2;
+    ball.gameObjectRect.x = SCREEN_WIDTH/2 - ball.gameObjectRect.w/2;
 }
 
+<<<<<<< HEAD
+=======
 
-void GameController::runGame(){
-
+void GameController::runGame()
+{
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
     //Game Loop
-    while(quit == false){
+    while(quit == false)
+    {
+        startMultiplayer();
+    }
+}
 
+void GameController::applyTexture(GameObject& updatedObject)
+{
+    SDL_RenderCopy(gameRenderer,updatedObject.getTexture(),NULL,&updatedObject.gameObjectRect);
+}
+
+void GameController::startMultiplayer()
+{
+    while(quit == false)
+    {
         //Input from players
-        keyboard(playerOne);
-
-        keyboard(playerTwo);
 
         SDL_RenderClear(gameRenderer);
 
-        applySurface(playerOne);
-        applySurface(playerTwo);
+        //First player actions
+        while( SDL_PollEvent( &e ) != 0 )
+        {
 
+<<<<<<< HEAD
         SDL_RenderPresent(gameRenderer);
+=======
+            //User requests quit
+            if( e.type == SDL_QUIT )
+            {
+                quit = true;
+            }
+            //User presses a key
+            else if( e.type == SDL_KEYDOWN)
+            {
+                if( e.key.keysym.sym  == SDLK_UP)
+                {
+                    playerOne.setUpPressed(true);
+                }
+
+                if( e.key.keysym.sym  == SDLK_DOWN)
+                {
+                    playerOne.setDownPressed(true);
+                }
+
+                if( e.key.keysym.sym  == SDLK_ESCAPE)
+                {
+                    quit = true;
+                }
+            }
+            else if(e.type == SDL_KEYUP)
+            {
+                if( e.key.keysym.sym  == SDLK_UP)
+                {
+                    playerOne.setUpPressed(false);
+                }
+
+                if( e.key.keysym.sym  == SDLK_DOWN)
+                {
+                    playerOne.setDownPressed(false);
+                }
+            }
+
+        //second player actions
+            //User requests quit
+            if( e.type == SDL_QUIT )
+            {
+                quit = true;
+            }
+            //User presses a key
+            else if( e.type == SDL_KEYDOWN)
+            {
+                if( e.key.keysym.sym  == SDLK_w)
+                {
+                    playerTwo.setUpPressed(true);
+                }
+
+                if( e.key.keysym.sym  == SDLK_s)
+                {
+                    playerTwo.setDownPressed(true);
+                }
+
+                if( e.key.keysym.sym  == SDLK_ESCAPE)
+                {
+                    quit = true;
+                }
+            }
+            else if(e.type == SDL_KEYUP)
+            {
+                if( e.key.keysym.sym  == SDLK_w)
+                {
+                    playerTwo.setUpPressed(false);
+                }
+
+                if( e.key.keysym.sym  == SDLK_s)
+                {
+                    playerTwo.setDownPressed(false);
+                }
+            }
+        }//while
+
+
+    if(playerOne.getUpPressed() == true)
+    {
+        playerOne.gameObjectRect.y -= 9;
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
     }
-}
 
-void GameController::testGame(){
+    if(playerOne.getDownPressed() == true)
+    {
+        playerOne.gameObjectRect.y += 9;
+    }
 
+<<<<<<< HEAD
     //Used for testing
+=======
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
 
-    //Game Loop
-    while(quit == false){
 
-        //Input from players
-        keyboard(playerOne);
+    if(playerTwo.getUpPressed() == true)
+    {
+        playerTwo.gameObjectRect.y -= 9;
+    }
 
-        keyboard(playerTwo);
+    if(playerTwo.getDownPressed() == true)
+    {
+        playerTwo.gameObjectRect.y += 9;
+    }
 
+
+    if(playerOne.gameObjectRect.y < 0)
+    {
+        playerOne.gameObjectRect.y = 0;
+    }
+
+    if(playerOne.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
+    {
+        playerOne.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
+    }
+
+<<<<<<< HEAD
         applySurface(playerOne);
         applySurface(playerTwo);
         applySurface(playerOne.getMyScore());
-
-        SDL_UpdateWindowSurface(gameWindow);
+=======
+    if(playerTwo.gameObjectRect.y < 0)
+    {
+        playerTwo.gameObjectRect.y = 0;
     }
-}
 
-void GameController::applySurface(GameObject& updatedObject)
-{
-    SDL_RenderCopy(gameRenderer,updatedObject.getTexture(),NULL,&updatedObject.gameObjectRect);
+    if(playerTwo.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
+    {
+        playerTwo.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
+    }
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
+
+    //Score stuff for testing
+    //playerOne.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
+    //playerTwo.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
+
+        applyTexture(playerOne);
+        applyTexture(playerTwo);
+        applyTexture(playerOne.getMyScore());
+        applyTexture(playerTwo.getMyScore());
+
+
+        SDL_RenderPresent(gameRenderer);
+    }
+
 }
 
 bool GameController::place_meeting(int checkX, int checkY, GameObject startObject, GameObject checkObject)

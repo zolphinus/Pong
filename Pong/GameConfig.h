@@ -9,7 +9,12 @@ const int SPRITE_SIZE = 32;
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+<<<<<<< HEAD
 #include <cmath>
+=======
+#include <stdlib.h>
+#include <ctime>
+>>>>>>> ebd52aaed5a420038e8a36506f15d98df57a6a45
 
 enum ImagesLoaded
 {
@@ -18,7 +23,17 @@ enum ImagesLoaded
     BLUE_PADDLE,
     RED_PADDLE,
     TEST_BUTTON,
+    NUMBER_ZERO,
     NUMBER_ONE,
+    NUMBER_TWO,
+    NUMBER_THREE,
+    NUMBER_FOUR,
+    NUMBER_FIVE,
+    NUMBER_SIX,
+    NUMBER_SEVEN,
+    NUMBER_EIGHT,
+    NUMBER_NINE,
+    BALL,
     IMAGE_LOADED_TOTAL
 };
 
@@ -50,6 +65,7 @@ enum buttonEvent
 #include "GameObject.h"
 #include "Score.h"
 #include "Player.h"
+#include "Ball.h"
 
 
 

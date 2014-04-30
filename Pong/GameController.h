@@ -18,7 +18,8 @@ public:
 
 protected:
 
-    void applySurface(GameObject&);
+    void applyTexture(GameObject&);
+
 
 private:
     SDL_Window* gameWindow;
@@ -28,6 +29,9 @@ private:
     //Game Objects
     Player playerOne;
     Player playerTwo;
+    Ball   ball;
+
+    SDL_Event e;
 
     //Menu objects
     MenuController mainMenu, pauseMenu;
@@ -37,12 +41,13 @@ private:
 
     bool quit;
 
-    bool upPressed,downPressed;
 
     void initGame();
-    void keyboard(Player&);
+    void keyboard(Player&, int, int);
     void close();
     void setupObjects();
+
+    void startMultiplayer();
 
 
     void initMainMenu();
