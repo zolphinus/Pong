@@ -62,6 +62,13 @@ void GameController::initGame(){
 
         }
 
+        int imgFlags = IMG_INIT_JPG | IMG_INIT_PNG;
+
+        if(IMG_Init(imgFlags) != (imgFlags))
+        {
+            cout << "Image failed to intiialize." << IMG_GetError();
+        }
+
         bool mediaLoaded = loadMedia();
 
         if(mediaLoaded == false)
@@ -144,7 +151,7 @@ void GameController::keyboard(Player& currentPlayer, int key_up,  int key_down){
 }
 SDL_Surface* GameController::loadSurface(std::string path)
 {
-    SDL_Surface *loadSurface = SDL_LoadBMP(path.c_str());
+    SDL_Surface *loadSurface = IMG_Load(path.c_str());
     if( loadSurface == NULL )
     {
         cout << "Unable to load image " << path << endl <<
@@ -165,7 +172,7 @@ bool GameController::loadMedia()
 
     //Loads images into the Game Images array so that we can reuse them multiple times
     //without needing to re-open the files
-    gameImages[BLUE_PADDLE] = loadSurface("images/blue_paddle.bmp");
+    gameImages[BLUE_PADDLE] = loadSurface("images/blue_paddle.png");
     if(gameImages[BLUE_PADDLE] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
