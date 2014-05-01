@@ -18,15 +18,11 @@ public:
 
 protected:
 
-    void applySurface(GameObject&);
+    void applyTexture(GameObject&);
 
 
 private:
     SDL_Window* gameWindow;
-    /*SDL_Surface* screenSurface;
-    SDL_Surface* backSurface;
-    SDL_Surface* currentImage;
-    SDL_Surface* tempSurface;*/
     SDL_Renderer *gameRenderer;
     Uint8 *keystate; //smoother keyboard interactions
 
@@ -36,6 +32,9 @@ private:
     Ball   ball;
 
     SDL_Event e;
+
+    //draws bounding boxes and collision check lines if true
+    bool debugMode;
 
     //Menu objects
     MenuController mainMenu, pauseMenu;
@@ -59,6 +58,11 @@ private:
 
     void drawMainMenu();
     void drawPauseMenu();
+
+    bool collision_point(int, int, GameObject *);
+    bool collision_line(int, int, int, int, GameObject *);
+    bool place_meeting(int, int, GameObject *, GameObject *);
+    double point_distance(int, int, int, int);
 
     bool loadMedia();
     SDL_Surface* loadSurface(std::string);
