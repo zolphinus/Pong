@@ -384,10 +384,10 @@
 1398577429 source:c:\users\zolphinus\documents\github\pong\pong\score.cpp
 	"GameConfig.h"
 
-1398890040 source:c:\users\conor\documents\github\pong\pong\gamecontroller.cpp
+1398904064 source:c:\users\conor\documents\github\pong\pong\gamecontroller.cpp
 	"GameController.h"
 
-1398889864 c:\users\conor\documents\github\pong\pong\gamecontroller.h
+1398903434 c:\users\conor\documents\github\pong\pong\gamecontroller.h
 	"GameConfig.h"
 	"MenuController.h"
 
@@ -410,7 +410,7 @@
 1398559912 c:\users\conor\documents\github\pong\pong\paddle.h
 	"GameConfig.h"
 
-1398889261 source:c:\users\conor\documents\github\pong\pong\main.cpp
+1398891184 source:c:\users\conor\documents\github\pong\pong\main.cpp
 	"GameController.h"
 
 1398552549 source:c:\users\conor\documents\github\pong\pong\paddle.cpp
@@ -468,4 +468,7 @@
 1398889864 c:\users\conor\documents\github\pong\pong\ball.h
 	"GameConfig.h"
 	"GameObject.h"
+
+1398889864 source:c:\users\conor\documents\github\pong\pong\ball.cpp
+	"Ball.h"
 

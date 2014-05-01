@@ -33,6 +33,9 @@ private:
 
     SDL_Event e;
 
+    //draws bounding boxes and collision check lines if true
+    bool debugMode;
+
     //Menu objects
     MenuController mainMenu, pauseMenu;
 
@@ -56,9 +59,9 @@ private:
     void drawMainMenu();
     void drawPauseMenu();
 
-    bool collision_point(int, int, GameObject);
-    bool collision_line(int, int, int, int, GameObject);
-    bool place_meeting(int, int, GameObject, GameObject);
+    bool collision_point(int, int, GameObject *);
+    bool collision_line(int, int, int, int, GameObject *);
+    bool place_meeting(int, int, GameObject *, GameObject *);
     double point_distance(int, int, int, int);
 
     bool loadMedia();

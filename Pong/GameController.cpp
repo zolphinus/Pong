@@ -37,6 +37,7 @@ void GameController::initGame(){
 
     gameWindow = NULL;
     quit = false;
+    debugMode = false;
     srand(time(NULL));
 
     //error check for initialization
@@ -238,7 +239,19 @@ void GameController::runGame()
 
 void GameController::applyTexture(GameObject& updatedObject)
 {
-    SDL_RenderCopy(gameRenderer,updatedObject.getTexture(),NULL,&updatedObject.gameObjectRect);
+    if(debugMode)
+    {
+        SDL_Rect drawRect = updatedObject.gameObjectRect;
+        SDL_SetRenderDrawColor(gameRenderer,0xFF,0x00,0x00,0xFF);
+        SDL_RenderDrawLine(gameRenderer,drawRect.x,drawRect.y,drawRect.x+drawRect.w,drawRect.y); //top line
+        SDL_RenderDrawLine(gameRenderer,drawRect.x,drawRect.y,drawRect.x,drawRect.y+drawRect.h); //left line
+        SDL_RenderDrawLine(gameRenderer,drawRect.x+drawRect.w,drawRect.y,drawRect.x+drawRect.w,drawRect.y+drawRect.h); //right line
+        SDL_RenderDrawLine(gameRenderer,drawRect.x,drawRect.y+drawRect.h,drawRect.x+drawRect.w,drawRect.y+drawRect.h); //bottom line
+    }
+    else
+    {
+        SDL_RenderCopy(gameRenderer,updatedObject.getTexture(),NULL,&updatedObject.gameObjectRect);
+    }
 }
 
 void GameController::startMultiplayer()
@@ -252,12 +265,10 @@ void GameController::startMultiplayer()
         //First player actions
         while( SDL_PollEvent( &e ) != 0 )
         {
-            //User requests quit
             if( e.type == SDL_QUIT )
             {
                 quit = true;
             }
-            //User presses a key
             else if( e.type == SDL_KEYDOWN)
             {
                 if( e.key.keysym.sym  == SDLK_UP)
@@ -268,11 +279,6 @@ void GameController::startMultiplayer()
                 if( e.key.keysym.sym  == SDLK_DOWN)
                 {
                     playerOne.setDownPressed(true);
-                }
-
-                if( e.key.keysym.sym  == SDLK_ESCAPE)
-                {
-                    quit = true;
                 }
             }
             else if(e.type == SDL_KEYUP)
@@ -288,14 +294,8 @@ void GameController::startMultiplayer()
                 }
             }
 
-        //second player actions
-            //User requests quit
-            if( e.type == SDL_QUIT )
-            {
-                quit = true;
-            }
-            //User presses a key
-            else if( e.type == SDL_KEYDOWN)
+            //Second player actions
+            if( e.type == SDL_KEYDOWN)
             {
                 if( e.key.keysym.sym  == SDLK_w)
                 {
@@ -305,11 +305,6 @@ void GameController::startMultiplayer()
                 if( e.key.keysym.sym  == SDLK_s)
                 {
                     playerTwo.setDownPressed(true);
-                }
-
-                if( e.key.keysym.sym  == SDLK_ESCAPE)
-                {
-                    quit = true;
                 }
             }
             else if(e.type == SDL_KEYUP)
@@ -324,72 +319,96 @@ void GameController::startMultiplayer()
                     playerTwo.setDownPressed(false);
                 }
             }
+
+            //General gamestate actions
+            if(e.type == SDL_KEYDOWN)
+            {
+                if(e.key.keysym.sym  == SDLK_ESCAPE)
+                {
+                    quit = true;
+                }
+
+                if(e.key.keysym.sym  == SDLK_LSHIFT)
+                {
+                   debugMode = !debugMode;
+                   cout << debugMode << endl;
+                }
+            }
         }//while
 
 
-    if(playerOne.getUpPressed() == true)
-    {
-        playerOne.gameObjectRect.y -= 9;
-    }
+        if(playerOne.getUpPressed() == true)
+        {
+            playerOne.gameObjectRect.y -= 9;
+        }
 
-    if(playerOne.getDownPressed() == true)
-    {
-        playerOne.gameObjectRect.y += 9;
-    }
+        if(playerOne.getDownPressed() == true)
+        {
+            playerOne.gameObjectRect.y += 9;
+        }
 
-    if(playerTwo.getUpPressed() == true)
-    {
-        playerTwo.gameObjectRect.y -= 9;
-    }
+        if(playerTwo.getUpPressed() == true)
+        {
+            playerTwo.gameObjectRect.y -= 9;
+        }
 
-    if(playerTwo.getDownPressed() == true)
-    {
-        playerTwo.gameObjectRect.y += 9;
-    }
+        if(playerTwo.getDownPressed() == true)
+        {
+            playerTwo.gameObjectRect.y += 9;
+        }
 
 
-    if(playerOne.gameObjectRect.y < 0)
-    {
-        playerOne.gameObjectRect.y = 0;
-    }
+        if(playerOne.gameObjectRect.y < 0)
+        {
+            playerOne.gameObjectRect.y = 0;
+        }
 
-    if(playerOne.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
-    {
-        playerOne.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
-    }
+        if(playerOne.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
+        {
+            playerOne.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
+        }
 
-    if(playerTwo.gameObjectRect.y < 0)
-    {
-        playerTwo.gameObjectRect.y = 0;
-    }
+        if(playerTwo.gameObjectRect.y < 0)
+        {
+            playerTwo.gameObjectRect.y = 0;
+        }
 
-    if(playerTwo.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
-    {
-        playerTwo.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
-    }
+        if(playerTwo.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
+        {
+            playerTwo.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
+        }
 
-    //Score stuff for testing
-    //playerOne.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
-    //playerTwo.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
+        //place_meeting(50,50,&playerOne,&playerTwo);
+        int mouseX,mouseY;
+        SDL_GetMouseState(&mouseX,&mouseY);
+
+        //Score stuff for testing
+        //playerOne.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
+        //playerTwo.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
 
         applyTexture(playerOne);
         applyTexture(playerTwo);
         applyTexture(playerOne.getMyScore());
         applyTexture(playerTwo.getMyScore());
 
+        place_meeting(mouseX,mouseY,&playerOne,&playerTwo);
+        collision_line(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,mouseX,mouseY,&playerTwo);
 
         SDL_RenderPresent(gameRenderer);
     }
 
 }
 
-bool GameController::place_meeting(int checkX, int checkY, GameObject startObject, GameObject checkObject)
+bool GameController::place_meeting(int checkX, int checkY, GameObject *startObject, GameObject *checkObject)
 {
-    SDL_Rect startRect = startObject.gameObjectRect;
-    if(collision_line(startRect.x,startRect.y,startRect.x+startRect.w,startRect.y,checkObject) || //top line
-       collision_line(startRect.x,startRect.y,startRect.x,startRect.y+startRect.h,checkObject) || //left line
-       collision_line(startRect.x+startRect.w,startRect.y,startRect.x+startRect.w,startRect.y+startRect.h,checkObject) || //right line
-       collision_line(startRect.x,startRect.y+startRect.h,startRect.x+startRect.w,startRect.y+startRect.h,checkObject))//bottom line
+    SDL_Rect startRect = startObject->gameObjectRect;
+
+    bool leftCol = collision_line(checkX,checkY,checkX,checkY+startRect.h,checkObject);
+    bool topCol = collision_line(checkX,checkY,checkX+startRect.w,checkY,checkObject);
+    bool rightCol = collision_line(checkX+startRect.w,checkY,checkX+startRect.w,checkY+startRect.h,checkObject);
+    bool bottomCol = collision_line(checkX,checkY+startRect.h,checkX+startRect.w,checkY+startRect.h,checkObject);
+
+    if( topCol || leftCol || rightCol || bottomCol)
     {
         return true;
     }
@@ -397,20 +416,55 @@ bool GameController::place_meeting(int checkX, int checkY, GameObject startObjec
     return false;
 }
 
-bool GameController::collision_line(int startX, int startY, int endX, int endY, GameObject checkObject)
+bool GameController::collision_line(int startX, int startY, int endX, int endY, GameObject *checkObject)
 {
     double checkAngle = atan2(endX-startX,endY-startY);
     int checkDistance = point_distance(startX,startY,endX,endY);
-    cout << "Angle: " << checkAngle << endl;
-    cout << "Distance: " << checkDistance << endl;
-    return false;
+
+    bool collided = false;
+    int checkX, checkY;
+    for(int i = 0; i <= checkDistance; i++)
+    {
+        checkX = startX+i*sin(checkAngle);
+        checkY = startY+i*(cos(checkAngle));
+
+        if(collision_point(checkX,checkY,checkObject))
+        {
+            collided = true;
+        }
+    }
+
+    //draw debug line
+    if(debugMode)
+    {
+        if(collided)
+        {
+            SDL_SetRenderDrawColor(gameRenderer,0x00,0xFF,0x00,0xFF);
+        }
+        else
+        {
+            SDL_SetRenderDrawColor(gameRenderer,0xFF,0x00,0x00,0xFF);
+        }
+
+        for(int i = 0; i <= checkDistance; i++)
+        {
+            checkX = startX+i*sin(checkAngle);
+            checkY = startY+i*cos(checkAngle);
+
+            SDL_RenderDrawPoint(gameRenderer,checkX,checkY);
+        }
+
+        SDL_SetRenderDrawColor(gameRenderer,0x00,0x00,0x00,0xFF);
+    }
+
+    return collided;
 }
 
-bool GameController::collision_point(int checkX, int checkY, GameObject checkObject)
+bool GameController::collision_point(int checkX, int checkY, GameObject *checkObject)
 {
-    SDL_Rect checkRect = checkObject.gameObjectRect;
+    SDL_Rect checkRect = checkObject->gameObjectRect;
 
-    if(checkX > checkRect.x && checkX < checkRect.x + checkRect.w && checkY > checkRect.y && checkY < checkRect.y + checkRect.h)
+    if(checkX >= checkRect.x && checkX <= checkRect.x + checkRect.w && checkY >= checkRect.y && checkY <= checkRect.y + checkRect.h)
     {
         return true;
     }
