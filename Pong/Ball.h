@@ -10,12 +10,19 @@ class Ball : public GameObject
 public:
     Ball();
     ~Ball();
-    int getXVelocity();
-    int getYVelocity();
+    float getXVelocity();
+    float getYVelocity();
     void setXVelocity(int newValue);
     void setYVelocity(int newValue);
-    void bounce();
-
+    void verticleBounce();
+    void horizontalBounce();
+    float
+    XPosition,
+    YPosition,
+    xVelocity,
+    yVelocity;
+    double
+    movementAngle;
 
 private:
     int

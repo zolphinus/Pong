@@ -2,8 +2,15 @@
 
 Ball::Ball()
 {
-    setXVelocity(rand()%10+10);
-    setYVelocity(rand()%10+10);
+    do
+    {
+       movementAngle = rand()%360+1;
+    }while((movementAngle>45&&movementAngle<135)||(movementAngle>225&&movementAngle<315));
+    xVelocity = 15*cos(movementAngle);
+    yVelocity = 15*-sin(movementAngle);
+
+    XPosition = SCREEN_WIDTH/2-20;
+    YPosition = SCREEN_HEIGHT/2-20;
 }
 
 Ball::~Ball()
@@ -11,14 +18,14 @@ Ball::~Ball()
 
 }
 
-int Ball::getXVelocity()
+float Ball::getXVelocity()
 {
-    return XVelocity;
+    return xVelocity;
 }
 
-int Ball::getYVelocity()
+float Ball::getYVelocity()
 {
-    return YVelocity;
+    return yVelocity;
 }
 
 void Ball::setXVelocity(int newValue)
@@ -31,7 +38,12 @@ void Ball::setYVelocity(int newValue)
     YVelocity = newValue;
 }
 
-void Ball::bounce()
+void Ball::horizontalBounce()
 {
-    XVelocity=-XVelocity;
+    xVelocity=-xVelocity;
+}
+
+void Ball::verticleBounce()
+{
+    yVelocity=-yVelocity;
 }

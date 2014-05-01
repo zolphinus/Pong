@@ -376,6 +376,9 @@ void GameController::startMultiplayer()
                 playerTwo.setDownPressed(false);
             }
         }
+
+
+
     }//while
 
 
@@ -423,8 +426,37 @@ void GameController::startMultiplayer()
     }
 
 
+
+    ball.XPosition += ball.getXVelocity();
+    ball.YPosition += ball.getYVelocity();
+
+    ball.gameObjectRect.x = ball.XPosition;
+    ball.gameObjectRect.y = ball.YPosition;
+
+    std::cout<<ball.XPosition <<endl;
+    std::cout<<ball.YPosition<<endl;
+    std::cout<<ball.xVelocity<<endl;
+    std::cout<<ball.yVelocity<<endl;
+        if(ball.gameObjectRect.y<0)
+        {
+            ball.verticleBounce();
+        }
+        else if(ball.gameObjectRect.y>SCREEN_HEIGHT-ball.gameObjectRect.h)
+        {
+            ball.verticleBounce();
+        }
+        if(ball.gameObjectRect.x<0)
+        {
+            ball.horizontalBounce();
+        }
+        else if(ball.gameObjectRect.x>SCREEN_WIDTH-ball.gameObjectRect.w)
+        {
+            ball.horizontalBounce();
+        }
+
         applySurface(playerOne);
         applySurface(playerTwo);
+        applySurface(ball);
         SDL_RenderPresent(gameRenderer);
 }
 
