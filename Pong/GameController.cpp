@@ -426,7 +426,7 @@ bool GameController::collision_line(int startX, int startY, int endX, int endY, 
     for(int i = 0; i <= checkDistance; i++)
     {
         checkX = startX+i*sin(checkAngle);
-        checkY = startY+i*(cos(checkAngle));
+        checkY = startY+i*cos(checkAngle);
 
         if(collision_point(checkX,checkY,checkObject))
         {
