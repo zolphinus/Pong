@@ -3,7 +3,7 @@
 	<SDL.h>
 	"GameController.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -34,12 +34,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_main.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -67,33 +67,33 @@
 	<stdlib.h>
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_config.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1397761950 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_platform.h
+1397588196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\begin_code.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\begin_code.h
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\close_code.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\close_code.h
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_assert.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_audio.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -103,24 +103,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_error.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_endian.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_thread.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -129,18 +129,18 @@
 	<process.h>
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -152,7 +152,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_events.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -166,7 +166,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_video.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -174,12 +174,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_rect.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -187,7 +187,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_surface.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -196,11 +196,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -208,27 +208,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -236,11 +236,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_quit.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -248,60 +248,60 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_touch.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_hints.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_log.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937196 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+1394940796 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_power.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_render.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_system.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -309,13 +309,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_timer.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1394937198 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_version.h
+1394940798 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
@@ -336,11 +336,10 @@
 1398138935 source:c:\users\zolphinus\desktop\code blocks projects\pong\paddle.cpp
 	"Paddle.h"
 
-1398815628 source:c:\users\zolphinus\documents\github\pong\pong\gamecontroller.cpp
+1399169169 source:c:\users\zolphinus\documents\github\pong\pong\gamecontroller.cpp
 	"GameController.h"
-	<iostream>
 
-1398816302 c:\users\zolphinus\documents\github\pong\pong\gamecontroller.h
+1399167982 c:\users\zolphinus\documents\github\pong\pong\gamecontroller.h
 	"GameConfig.h"
 	"MenuController.h"
 
@@ -348,38 +347,44 @@
 	<SDL.h>
 	"GameObject.h"
 
-1398774187 source:c:\users\zolphinus\documents\github\pong\pong\main.cpp
+1399166709 source:c:\users\zolphinus\documents\github\pong\pong\main.cpp
 	"GameController.h"
 
 1398138935 source:c:\users\zolphinus\documents\github\pong\pong\paddle.cpp
 	"Paddle.h"
 
-1398774187 c:\users\zolphinus\documents\github\pong\pong\gameobject.h
+1399166709 c:\users\zolphinus\documents\github\pong\pong\gameobject.h
 	<SDL.h>
 
-1398774187 source:c:\users\zolphinus\documents\github\pong\pong\gameobject.cpp
+1399166709 source:c:\users\zolphinus\documents\github\pong\pong\gameobject.cpp
 	"GameObject.h"
 	<iostream>
 
-1398774187 c:\users\zolphinus\documents\github\pong\pong\gameconfig.h
+1399166709 c:\users\zolphinus\documents\github\pong\pong\gameconfig.h
 	<vector>
 	<iostream>
 	<SDL.h>
+	<SDL_image.h>
+	<cmath>
+	<stdlib.h>
+	<ctime>
+	<cmath>
 	"GameObject.h"
 	"Score.h"
 	"Player.h"
+	"Ball.h"
 
-1398815515 c:\users\zolphinus\documents\github\pong\pong\player.h
+1399166709 c:\users\zolphinus\documents\github\pong\pong\player.h
 	"GameConfig.h"
 	"Score.h"
 
-1398815757 source:c:\users\zolphinus\documents\github\pong\pong\player.cpp
+1399166709 source:c:\users\zolphinus\documents\github\pong\pong\player.cpp
 	"Player.h"
 
-1398774187 c:\users\zolphinus\documents\github\pong\pong\score.h
+1399166709 c:\users\zolphinus\documents\github\pong\pong\score.h
 	<SDL.h>
 
-1398774187 source:c:\users\zolphinus\documents\github\pong\pong\score.cpp
+1399166709 source:c:\users\zolphinus\documents\github\pong\pong\score.cpp
 	"GameConfig.h"
 
 1398708539 source:c:\users\conor\documents\github\pong\pong\gamecontroller.cpp
@@ -427,17 +432,17 @@
 1398702586 source:c:\users\conor\documents\github\pong\pong\button.cpp
 	"Button.h"
 
-1398774187 c:\users\zolphinus\documents\github\pong\pong\menucontroller.h
+1399166709 c:\users\zolphinus\documents\github\pong\pong\menucontroller.h
 	"GameConfig.h"
 	"Button.h"
 
-1398774187 c:\users\zolphinus\documents\github\pong\pong\button.h
+1399166709 c:\users\zolphinus\documents\github\pong\pong\button.h
 	"GameConfig.h"
 
-1398774187 source:c:\users\zolphinus\documents\github\pong\pong\button.cpp
+1399166709 source:c:\users\zolphinus\documents\github\pong\pong\button.cpp
 	"Button.h"
 
-1398774187 source:c:\users\zolphinus\documents\github\pong\pong\menucontroller.cpp
+1399166709 source:c:\users\zolphinus\documents\github\pong\pong\menucontroller.cpp
 	"MenuController.h"
 
 1398708342 c:\users\conor\documents\github\pong\pong\score.h
@@ -515,4 +520,17 @@
 1398971327 source:c:\users\jeremy\documents\github\pong\pong\gamecontroller.cpp
 	"GameController.h"
 	<iostream>
+
+1399166709 source:c:\users\zolphinus\documents\github\pong\pong\ball.cpp
+	"Ball.h"
+
+1399166709 c:\users\zolphinus\documents\github\pong\pong\ball.h
+	"GameConfig.h"
+	"GameObject.h"
+
+1376159942 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
 

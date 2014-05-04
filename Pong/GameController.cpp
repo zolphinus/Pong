@@ -97,7 +97,8 @@ void GameController::drawMainMenu()
 
 SDL_Surface* GameController::loadSurface(std::string path)
 {
-    SDL_Surface *loadSurface = IMG_Load(path.c_str());
+    SDL_Surface *loadSurface;
+    loadSurface = IMG_Load(path.c_str());
 
     if( loadSurface == NULL )
     {
@@ -274,6 +275,7 @@ void GameController::startMultiplayer()
                 if( e.key.keysym.sym  == SDLK_UP)
                 {
                     playerOne.setUpPressed(true);
+
                 }
 
                 if( e.key.keysym.sym  == SDLK_DOWN)
@@ -333,6 +335,8 @@ void GameController::startMultiplayer()
                    debugMode = !debugMode;
                    cout << debugMode << endl;
                 }
+
+
             }
         }//while
 
@@ -477,4 +481,43 @@ double GameController::point_distance(int x1, int y1, int x2, int y2)
 {
     double distance = sqrt(pow(x2-x1,2)+pow(y2-y1,2));
     return distance;
+}
+
+void GameController::playerScored(Player& scoringPlayer){
+
+    int tempScore = scoringPlayer.getScoreValue();
+    tempScore++;
+
+    switch(tempScore){
+    case 1:
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_ONE], gameRenderer);
+        break;
+    case 2:
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_TWO], gameRenderer);
+        break;
+    case 3:
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_THREE], gameRenderer);
+        break;
+    case 4:
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_FOUR], gameRenderer);
+        break;
+    case 5:
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_FIVE], gameRenderer);
+        break;
+    case 6:
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_SIX], gameRenderer);
+        break;
+    case 7:
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_SEVEN], gameRenderer);
+        break;
+    case 8:
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_EIGHT], gameRenderer);
+        break;
+    case 9:
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_NINE], gameRenderer);
+        break;
+    case 10:
+        std::cout << "SCORING WORKS" << std::endl;
+        break;
+    }
 }

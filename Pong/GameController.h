@@ -49,6 +49,7 @@ private:
     void keyboard(Player&, int, int);
     void close();
     void setupObjects();
+    void playerScored(Player&);
 
     void startMultiplayer();
 
