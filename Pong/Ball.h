@@ -14,20 +14,20 @@ public:
     float getYVelocity();
     void setXVelocity(int newValue);
     void setYVelocity(int newValue);
-    void verticleBounce();
+    void verticalBounce();
     void horizontalBounce();
-    float
-    XPosition,
-    YPosition,
-    xVelocity,
-    yVelocity;
-    double
-    movementAngle;
+    float xPosition, yPosition;
+    double movementAngle;
+
+    void resetBall();
 
 private:
-    int
-    XVelocity,
-    YVelocity;
+    float
+    velocity,
+    xVelocity,
+    yVelocity;
+
+    void calcVelocities();
 };
 
 #endif // BALL_H_INCLUDED

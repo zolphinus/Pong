@@ -196,7 +196,7 @@ bool GameController::loadMedia()
         return false;
     }
 
-    gameImages[BALL] = loadSurface("images/ball.bmp");
+    gameImages[BALL] = loadSurface("images/ball.png");
     if(gameImages[BALL] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
@@ -266,31 +266,27 @@ void GameController::startMultiplayer()
         //First player actions
         while( SDL_PollEvent( &e ) != 0 )
         {
-            if( e.type == SDL_QUIT )
+            if( e.type == SDL_KEYDOWN)
             {
-                quit = true;
-            }
-            else if( e.type == SDL_KEYDOWN)
-            {
-                if( e.key.keysym.sym  == SDLK_UP)
+                if( e.key.keysym.sym  == SDLK_w)
                 {
                     playerOne.setUpPressed(true);
 
                 }
 
-                if( e.key.keysym.sym  == SDLK_DOWN)
+                if( e.key.keysym.sym  == SDLK_s)
                 {
                     playerOne.setDownPressed(true);
                 }
             }
             else if(e.type == SDL_KEYUP)
             {
-                if( e.key.keysym.sym  == SDLK_UP)
+                if( e.key.keysym.sym  == SDLK_w)
                 {
                     playerOne.setUpPressed(false);
                 }
 
-                if( e.key.keysym.sym  == SDLK_DOWN)
+                if( e.key.keysym.sym  == SDLK_s)
                 {
                     playerOne.setDownPressed(false);
                 }
@@ -299,24 +295,24 @@ void GameController::startMultiplayer()
             //Second player actions
             if( e.type == SDL_KEYDOWN)
             {
-                if( e.key.keysym.sym  == SDLK_w)
+                if( e.key.keysym.sym  == SDLK_UP)
                 {
                     playerTwo.setUpPressed(true);
                 }
 
-                if( e.key.keysym.sym  == SDLK_s)
+                if( e.key.keysym.sym  == SDLK_DOWN)
                 {
                     playerTwo.setDownPressed(true);
                 }
             }
             else if(e.type == SDL_KEYUP)
             {
-                if( e.key.keysym.sym  == SDLK_w)
+                if( e.key.keysym.sym  == SDLK_UP)
                 {
                     playerTwo.setUpPressed(false);
                 }
 
-                if( e.key.keysym.sym  == SDLK_s)
+                if( e.key.keysym.sym  == SDLK_DOWN)
                 {
                     playerTwo.setDownPressed(false);
                 }
@@ -333,7 +329,6 @@ void GameController::startMultiplayer()
                 if(e.key.keysym.sym  == SDLK_LSHIFT)
                 {
                    debugMode = !debugMode;
-                   cout << debugMode << endl;
                 }
 
 
@@ -382,14 +377,23 @@ void GameController::startMultiplayer()
             playerTwo.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
         }
 
-        //place_meeting(50,50,&playerOne,&playerTwo);
         int mouseX,mouseY;
         SDL_GetMouseState(&mouseX,&mouseY);
 
-        //Score stuff for testing
-        //playerOne.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
-        //playerTwo.setScore(1, gameImages[NUMBER_ONE], gameRenderer);
+        int scoreSide = moveBall();
 
+        if(scoreSide == 1)
+        {
+            playerScored(playerTwo);
+            ball.resetBall();
+        }
+        else if(scoreSide == 2)
+        {
+            playerScored(playerOne);
+            ball.resetBall();
+        }
+
+        applyTexture(ball);
         applyTexture(playerOne);
         applyTexture(playerTwo);
         applyTexture(playerOne.getMyScore());
@@ -400,7 +404,54 @@ void GameController::startMultiplayer()
 
         SDL_RenderPresent(gameRenderer);
     }
+}
 
+int GameController::moveBall()
+{
+    float newBallX,newBallY;
+
+    newBallX = ball.xPosition + ball.getXVelocity();
+    newBallY = ball.yPosition + ball.getYVelocity();
+
+    if(newBallY < 0 || newBallY > SCREEN_HEIGHT-(ball.gameObjectRect.h))
+    {
+        ball.verticalBounce();
+        if(newBallY < 0)
+        {
+            newBallY = 0;
+        }
+        else
+        {
+            newBallY = SCREEN_HEIGHT-(ball.gameObjectRect.h);
+        }
+    }
+
+    if(place_meeting(newBallX,newBallY,&ball,&playerOne))
+    {
+        ball.horizontalBounce();
+        newBallX = ball.gameObjectRect.x;
+    }
+    else if(place_meeting(newBallX,newBallY,&ball,&playerTwo))
+    {
+        ball.horizontalBounce();
+        newBallX = ball.gameObjectRect.x;
+    }
+
+    if(newBallX <= playerOne.gameObjectRect.x+playerOne.gameObjectRect.w)
+    {
+        return 1;
+    }
+    else if(newBallX >= playerTwo.gameObjectRect.x-ball.gameObjectRect.w)
+    {
+        return 2;
+    }
+
+    ball.xPosition = newBallX;
+    ball.yPosition = newBallY;
+    ball.gameObjectRect.x = ball.xPosition;
+    ball.gameObjectRect.y = ball.yPosition;
+
+    return 0;
 }
 
 bool GameController::place_meeting(int checkX, int checkY, GameObject *startObject, GameObject *checkObject)

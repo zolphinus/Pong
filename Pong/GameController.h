@@ -53,12 +53,16 @@ private:
 
     void startMultiplayer();
 
+    int moveBall();
 
     void initMainMenu();
     void initPauseMenu();
 
     void drawMainMenu();
     void drawPauseMenu();
+
+    buttonEvent runMainMenu();
+    buttonEvent runPauseMenu();
 
     bool collision_point(int, int, GameObject *);
     bool collision_line(int, int, int, int, GameObject *);
