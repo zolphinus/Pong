@@ -15,8 +15,7 @@ bool PowerUp::getIsOnScreen(){
     return isOnScreen;
 }
 
-void PowerUp::setDuration(int newDuration){
-    duration = newDuration;
+void PowerUp::pickedUp(){
     isActive = true;
     isOnScreen = false;
 }
@@ -41,9 +40,8 @@ void PowerUp::spawnPowerUp(int newDuration){
     GameObject::gameObjectRect.y = randY;
     GameObject::gameObjectRect.x = centerX;
 
-    setDuration(newDuration);
     duration = newDuration;
-    isActive = true;
-    isOnScreen = false;
+    isOnScreen = true;
+    isActive = false;
 }
 

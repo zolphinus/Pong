@@ -2,7 +2,7 @@
 #define GAME_CONTROLLER
 #include "GameConfig.h"
 #include "MenuController.h"
-
+#include "PowerUp.h"
 
 
 
@@ -30,6 +30,7 @@ private:
     Player playerOne;
     Player playerTwo;
     Ball   ball;
+    PowerUp testItem;
 
     Last_Hit ballHitBy;
 

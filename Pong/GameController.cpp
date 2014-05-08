@@ -256,6 +256,12 @@ bool GameController::loadMedia()
         return false;
     }
 
+    gameImages[VELOCITY_POWER] = loadSurface("images/blue_shell.png");
+    if(gameImages[VELOCITY_POWER] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
     return success;
 }
 

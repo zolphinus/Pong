@@ -33,6 +33,7 @@ enum ImagesLoaded
     NUMBER_EIGHT,
     NUMBER_NINE,
     BALL,
+    VELOCITY_POWER,
     IMAGE_LOADED_TOTAL
 };
 

@@ -18,7 +18,7 @@ private:
     bool isActive;
     bool isOnScreen;
 
-    void setDuration(int);
+    void pickedUp();
 
 };
 
