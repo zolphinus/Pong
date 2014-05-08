@@ -48,6 +48,12 @@ enum Score_Side
     RIGHT
 };
 
+enum Last_Hit
+{
+    PLAYER_ONE,
+    PLAYER_TWO
+};
+
 
 enum buttonEvent
 {

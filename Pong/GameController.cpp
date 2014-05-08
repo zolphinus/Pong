@@ -476,11 +476,13 @@ int GameController::moveBall()
 
     if(place_meeting(newBallX,newBallY,&ball,&playerOne))
     {
+        ballHitBy = PLAYER_ONE;
         ball.horizontalBounce();
         newBallX = ball.gameObjectRect.x;
     }
     else if(place_meeting(newBallX,newBallY,&ball,&playerTwo))
     {
+        ballHitBy = PLAYER_TWO;
         ball.horizontalBounce();
         newBallX = ball.gameObjectRect.x;
     }

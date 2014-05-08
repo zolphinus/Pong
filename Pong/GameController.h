@@ -31,6 +31,8 @@ private:
     Player playerTwo;
     Ball   ball;
 
+    Last_Hit ballHitBy;
+
     SDL_Event e;
 
     //draws bounding boxes and collision check lines if true
