@@ -50,6 +50,8 @@
 		<Unit filename="MenuController.h" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.h" />
+		<Unit filename="PowerUp.cpp" />
+		<Unit filename="PowerUp.h" />
 		<Unit filename="Score.cpp" />
 		<Unit filename="Score.h" />
 		<Extensions>
