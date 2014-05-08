@@ -37,7 +37,7 @@ private:
     bool debugMode, seizureMode;
 
     //Menu objects
-    MenuController mainMenu, pauseMenu;
+    MenuController mainMenu, pauseMenu, diffMenu;
 
     //Holds all the game images for reuse
     SDL_Surface* gameImages[IMAGE_LOADED_TOTAL];
@@ -52,6 +52,9 @@ private:
     void playerScored(Player&);
 
     void startMultiplayer();
+    void startSingleplayer();
+
+    int AISpeedCap;
 
     int moveBall();
 

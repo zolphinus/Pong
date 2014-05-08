@@ -70,7 +70,7 @@
 1394937197 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1398274566 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_platform.h
+1398305493 c:\mingw libraries\i686-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
@@ -387,14 +387,14 @@
 1399166709 source:c:\users\zolphinus\documents\github\pong\pong\score.cpp
 	"GameConfig.h"
 
-1399395282 source:c:\users\conor\documents\github\pong\pong\gamecontroller.cpp
+1399586762 source:c:\users\conor\documents\github\pong\pong\gamecontroller.cpp
 	"GameController.h"
 
-1399534865 c:\users\conor\documents\github\pong\pong\gamecontroller.h
+1399586637 c:\users\conor\documents\github\pong\pong\gamecontroller.h
 	"GameConfig.h"
 	"MenuController.h"
 
-1399393129 c:\users\conor\documents\github\pong\pong\gameconfig.h
+1399583975 c:\users\conor\documents\github\pong\pong\gameconfig.h
 	<vector>
 	<iostream>
 	<SDL.h>
@@ -408,33 +408,33 @@
 	"Player.h"
 	"Ball.h"
 
-1398708085 c:\users\conor\documents\github\pong\pong\gameobject.h
+1398730755 c:\users\conor\documents\github\pong\pong\gameobject.h
 	<SDL.h>
 
 1398559912 c:\users\conor\documents\github\pong\pong\paddle.h
 	"GameConfig.h"
 
-1398782085 source:c:\users\conor\documents\github\pong\pong\main.cpp
+1398891184 source:c:\users\conor\documents\github\pong\pong\main.cpp
 	"GameController.h"
 
 1398552549 source:c:\users\conor\documents\github\pong\pong\paddle.cpp
 	"Paddle.h"
 
-1398708613 source:c:\users\conor\documents\github\pong\pong\gameobject.cpp
+1398730755 source:c:\users\conor\documents\github\pong\pong\gameobject.cpp
 	"GameObject.h"
 	<iostream>
 
-1398706669 c:\users\conor\documents\github\pong\pong\menucontroller.h
+1398730755 c:\users\conor\documents\github\pong\pong\menucontroller.h
 	"GameConfig.h"
 	"Button.h"
 
-1398695567 c:\users\conor\documents\github\pong\pong\button.h
+1398730755 c:\users\conor\documents\github\pong\pong\button.h
 	"GameConfig.h"
 
-1399394842 source:c:\users\conor\documents\github\pong\pong\menucontroller.cpp
+1399583975 source:c:\users\conor\documents\github\pong\pong\menucontroller.cpp
 	"MenuController.h"
 
-1398708613 source:c:\users\conor\documents\github\pong\pong\button.cpp
+1398730755 source:c:\users\conor\documents\github\pong\pong\button.cpp
 	"Button.h"
 
 1399166709 c:\users\zolphinus\documents\github\pong\pong\menucontroller.h
@@ -450,17 +450,17 @@
 1399166709 source:c:\users\zolphinus\documents\github\pong\pong\menucontroller.cpp
 	"MenuController.h"
 
-1398869090 c:\users\conor\documents\github\pong\pong\score.h
+1398889864 c:\users\conor\documents\github\pong\pong\score.h
 	<SDL.h>
 
-1398869090 c:\users\conor\documents\github\pong\pong\player.h
+1398889864 c:\users\conor\documents\github\pong\pong\player.h
 	"GameConfig.h"
 	"Score.h"
 
-1398869090 source:c:\users\conor\documents\github\pong\pong\player.cpp
+1398889864 source:c:\users\conor\documents\github\pong\pong\player.cpp
 	"Player.h"
 
-1398869090 source:c:\users\conor\documents\github\pong\pong\score.cpp
+1398889864 source:c:\users\conor\documents\github\pong\pong\score.cpp
 	"GameConfig.h"
 
 1398811217 source:c:\users\jeremy\documents\github\pong\pong\button.cpp
@@ -539,10 +539,10 @@
 	"begin_code.h"
 	"close_code.h"
 
-1399308198 c:\users\conor\documents\github\pong\pong\ball.h
+1399583975 c:\users\conor\documents\github\pong\pong\ball.h
 	"GameConfig.h"
 	"GameObject.h"
 
-1399394256 source:c:\users\conor\documents\github\pong\pong\ball.cpp
+1399583975 source:c:\users\conor\documents\github\pong\pong\ball.cpp
 	"Ball.h"
 

@@ -40,6 +40,7 @@ void GameController::initGame(){
     debugMode = false;
     seizureMode = false;
     srand(time(NULL));
+    AISpeedCap = 3;
 
     //error check for initialization
     if( SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -86,11 +87,22 @@ void GameController::initGame(){
 
 void GameController::initMainMenu()
 {
+    int prevButtonHeight = 0;
     Button *newButton = new Button(0,0);
     newButton->setTexture(gameImages[MULTI_BUTTON],gameRenderer);
     newButton->gameObjectRect.x = SCREEN_WIDTH/2 - newButton->gameObjectRect.w/2;
     newButton->gameObjectRect.y = SCREEN_HEIGHT/2;
     mainMenu.addButton(newButton,START_PVP);
+
+    prevButtonHeight = newButton->gameObjectRect.h;
+
+    newButton = new Button(0,0);
+    newButton->setTexture(gameImages[SINGLE_BUTTON],gameRenderer);
+    newButton->gameObjectRect.x = SCREEN_WIDTH/2 - newButton->gameObjectRect.w/2;
+    newButton->gameObjectRect.y = SCREEN_HEIGHT/2+prevButtonHeight+16;
+    mainMenu.addButton(newButton,START_AI);
+
+    prevButtonHeight = newButton->gameObjectRect.h;
 }
 
 void GameController::drawMainMenu()
@@ -111,9 +123,18 @@ buttonEvent GameController::runMainMenu()
         //Clear the event queue so SDL doesn't barf
         while(SDL_PollEvent(&menuTemp) != 0)
         {
-
+            if(menuTemp.type == SDL_QUIT)
+            {
+                return QUIT;
+            }
+            else if(menuTemp.type == SDL_KEYDOWN)
+            {
+                if(menuTemp.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    return QUIT;
+                }
+            }
         }
-
 
         drawMainMenu();
         currentEvent = mainMenu.mouseCheck();
@@ -272,6 +293,10 @@ void GameController::runGame()
     {
         startMultiplayer();
     }
+    else if(menuEvent == START_AI)
+    {
+        startSingleplayer();
+    }
 }
 
 void GameController::applyTexture(GameObject& updatedObject)
@@ -376,6 +401,10 @@ void GameController::startMultiplayer()
                    }
                 }
             }
+            else if(e.type == SDL_QUIT)
+            {
+                quit = true;
+            }
         }//while
 
 
@@ -435,6 +464,154 @@ void GameController::startMultiplayer()
             playerScored(playerOne);
             ball.resetBall();
         }
+
+        if(seizureMode)
+        {
+            SDL_SetRenderDrawColor(gameRenderer,rand() % 0xFF,rand() % 0xFF, rand() % 0xFF, rand() % 0xFF);
+        }
+
+        applyTexture(playerOne);
+        applyTexture(playerTwo);
+        applyTexture(playerOne.getMyScore());
+        applyTexture(playerTwo.getMyScore());
+        applyTexture(ball);
+
+        place_meeting(mouseX,mouseY,&playerOne,&playerTwo);
+        collision_line(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,mouseX,mouseY,&playerTwo);
+
+        SDL_RenderPresent(gameRenderer);
+    }
+}
+
+void GameController::startSingleplayer()
+{
+    while(quit == false)
+    {
+        //Input from player
+
+        //First player actions
+        while( SDL_PollEvent( &e ) != 0 )
+        {
+            if( e.type == SDL_KEYDOWN)
+            {
+                if( e.key.keysym.sym  == SDLK_w)
+                {
+                    playerOne.setUpPressed(true);
+
+                }
+
+                if( e.key.keysym.sym  == SDLK_s)
+                {
+                    playerOne.setDownPressed(true);
+                }
+            }
+            else if(e.type == SDL_KEYUP)
+            {
+                if( e.key.keysym.sym  == SDLK_w)
+                {
+                    playerOne.setUpPressed(false);
+                }
+
+                if( e.key.keysym.sym  == SDLK_s)
+                {
+                    playerOne.setDownPressed(false);
+                }
+            }
+
+            //General gamestate actions
+            if(e.type == SDL_KEYDOWN)
+            {
+                if(e.key.keysym.sym  == SDLK_ESCAPE)
+                {
+                    quit = true;
+                }
+
+                if(e.key.keysym.sym  == SDLK_LSHIFT|| e.key.keysym.sym == SDLK_RSHIFT)
+                {
+                   debugMode = !debugMode;
+                }
+
+                if(e.key.keysym.sym  == SDLK_LCTRL || e.key.keysym.sym == SDLK_RCTRL)
+                {
+                   seizureMode = !seizureMode;
+                   if(!seizureMode)
+                   {
+                       SDL_SetRenderDrawColor(gameRenderer,0x00,0x00,0x00,0xFF);
+                   }
+                }
+            }
+            else if(e.type == SDL_QUIT)
+            {
+                quit = true;
+            }
+        }//while
+
+
+        if(playerOne.getUpPressed() == true)
+        {
+            playerOne.gameObjectRect.y -= 9;
+        }
+
+        if(playerOne.getDownPressed() == true)
+        {
+            playerOne.gameObjectRect.y += 9;
+        }
+
+        if(point_distance(0,playerTwo.gameObjectRect.y+playerTwo.gameObjectRect.h/2,
+                          0,ball.gameObjectRect.y+ball.gameObjectRect.h/2) >= AISpeedCap)
+        {
+            if(playerTwo.gameObjectRect.y+playerTwo.gameObjectRect.h/2 < ball.gameObjectRect.y+ball.gameObjectRect.h/2)
+            {
+                playerTwo.gameObjectRect.y += AISpeedCap;
+            }
+            else
+            {
+                playerTwo.gameObjectRect.y -= AISpeedCap;
+            }
+        }
+        else
+        {
+            playerTwo.gameObjectRect.y = ball.gameObjectRect.y+ball.gameObjectRect.h/2-playerTwo.gameObjectRect.h/2;
+        }
+
+        //
+        if(playerOne.gameObjectRect.y < 0)
+        {
+            playerOne.gameObjectRect.y = 0;
+        }
+
+        if(playerOne.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
+        {
+            playerOne.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
+        }
+
+        if(playerTwo.gameObjectRect.y < 0)
+        {
+            playerTwo.gameObjectRect.y = 0;
+        }
+
+        if(playerTwo.gameObjectRect.y > (SCREEN_HEIGHT - playerOne.gameObjectRect.h))
+        {
+            playerTwo.gameObjectRect.y = (SCREEN_HEIGHT - playerOne.gameObjectRect.h);
+        }
+
+        int mouseX,mouseY;
+        SDL_GetMouseState(&mouseX,&mouseY);
+
+        int scoreSide = moveBall();
+
+        if(scoreSide == 1)
+        {
+            playerScored(playerTwo);
+            ball.resetBall();
+        }
+        else if(scoreSide == 2)
+        {
+            playerScored(playerOne);
+            ball.resetBall();
+        }
+
+        SDL_RenderClear(gameRenderer);
 
         if(seizureMode)
         {
