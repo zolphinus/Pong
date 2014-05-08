@@ -288,6 +288,9 @@ void GameController::setupObjects(){
     ball.gameObjectRect.y = SCREEN_HEIGHT/2 - ball.gameObjectRect.h/2;
     ball.gameObjectRect.x = SCREEN_WIDTH/2 - ball.gameObjectRect.w/2;
     ball.resetBall();
+
+    testItem.setTexture(gameImages[VELOCITY_POWER], gameRenderer);
+    testItem.spawnPowerUp(30);
 }
 
 void GameController::runGame()
@@ -481,6 +484,14 @@ void GameController::startMultiplayer()
         applyTexture(playerOne.getMyScore());
         applyTexture(playerTwo.getMyScore());
         applyTexture(ball);
+
+        /*
+        if(testItem.getIsOnScreen())
+        {
+            applyTexture(testItem);
+        }
+        testItem.pickedUp();
+        */
 
         place_meeting(mouseX,mouseY,&playerOne,&playerTwo);
         collision_line(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,mouseX,mouseY,&playerTwo);

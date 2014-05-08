@@ -11,6 +11,8 @@ public:
 
     void updateDuration();
     void spawnPowerUp(int);
+    void setTexture(SDL_Surface *,SDL_Renderer *);
+    void pickedUp();
 
 
 private:
@@ -18,8 +20,9 @@ private:
     bool isActive;
     bool isOnScreen;
 
-    void pickedUp();
-
 };
+
+
+
 
 #endif // POWER_UP

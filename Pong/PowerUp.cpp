@@ -35,7 +35,7 @@ void PowerUp::updateDuration(){
 
 void PowerUp::spawnPowerUp(int newDuration){
     int randY = rand() % SCREEN_HEIGHT - GameObject::gameObjectRect.h;
-    int centerX = SCREEN_WIDTH - GameObject::gameObjectRect.w;
+    int centerX = SCREEN_WIDTH/2 - GameObject::gameObjectRect.w/2;
 
     GameObject::gameObjectRect.y = randY;
     GameObject::gameObjectRect.x = centerX;
@@ -45,3 +45,13 @@ void PowerUp::spawnPowerUp(int newDuration){
     isActive = false;
 }
 
+void PowerUp::setTexture(SDL_Surface *newSurface,SDL_Renderer *renderer)
+{
+    if(gameObjectTexture != NULL)
+    {
+        SDL_DestroyTexture(gameObjectTexture);
+    }
+    gameObjectTexture = SDL_CreateTextureFromSurface(renderer,newSurface);
+    gameObjectRect.w = 96;
+    gameObjectRect.h = 96;
+}
