@@ -34,7 +34,7 @@ private:
     SDL_Event e;
 
     //draws bounding boxes and collision check lines if true
-    bool debugMode;
+    bool debugMode, seizureMode;
 
     //Menu objects
     MenuController mainMenu, pauseMenu;

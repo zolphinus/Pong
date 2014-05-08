@@ -20,7 +20,8 @@ enum ImagesLoaded
     //it doesn't break any current systems but extends what we can load/draw
     BLUE_PADDLE,
     RED_PADDLE,
-    TEST_BUTTON,
+    SINGLE_BUTTON,
+    MULTI_BUTTON,
     NUMBER_ZERO,
     NUMBER_ONE,
     NUMBER_TWO,

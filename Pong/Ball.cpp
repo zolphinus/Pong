@@ -47,7 +47,7 @@ void Ball::verticalBounce()
 
 void Ball::resetBall()
 {
-    velocity = rand() % 5 + 8;
+    velocity = 6;
     int side = rand() % 2;
 
     int tempAngle = 0;

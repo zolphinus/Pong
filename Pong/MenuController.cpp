@@ -21,6 +21,7 @@ buttonEvent MenuController::mouseCheck()
     buttonEvent currentEvent = NONE;
     for(int i = 0;i<myButtons.size();i++)
     {
+        //std::cout << "BUTTON " << i << std::endl;
         myButtons.at(i)->mouseCheck();
         if(myButtons.at(i)->getClicked())
         {

@@ -38,6 +38,7 @@ void GameController::initGame(){
     gameWindow = NULL;
     quit = false;
     debugMode = false;
+    seizureMode = false;
     srand(time(NULL));
 
     //error check for initialization
@@ -86,13 +87,39 @@ void GameController::initGame(){
 void GameController::initMainMenu()
 {
     Button *newButton = new Button(0,0);
-    newButton->setTexture(gameImages[TEST_BUTTON],gameRenderer);
-    mainMenu.addButton(newButton,QUIT);
+    newButton->setTexture(gameImages[MULTI_BUTTON],gameRenderer);
+    newButton->gameObjectRect.x = SCREEN_WIDTH/2 - newButton->gameObjectRect.w/2;
+    newButton->gameObjectRect.y = SCREEN_HEIGHT/2;
+    mainMenu.addButton(newButton,START_PVP);
 }
 
 void GameController::drawMainMenu()
 {
+    SDL_RenderClear(gameRenderer);
     mainMenu.drawMenu(gameRenderer);
+    SDL_RenderPresent(gameRenderer);
+}
+
+buttonEvent GameController::runMainMenu()
+{
+    buttonEvent currentEvent = NONE;
+
+    SDL_Event menuTemp;
+
+    while(currentEvent == NONE)
+    {
+        //Clear the event queue so SDL doesn't barf
+        while(SDL_PollEvent(&menuTemp) != 0)
+        {
+
+        }
+
+
+        drawMainMenu();
+        currentEvent = mainMenu.mouseCheck();
+    }
+
+    return currentEvent;
 }
 
 SDL_Surface* GameController::loadSurface(std::string path)
@@ -126,6 +153,18 @@ bool GameController::loadMedia()
 
     gameImages[RED_PADDLE] = loadSurface("images/red_paddle.bmp");
     if(gameImages[RED_PADDLE] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[SINGLE_BUTTON] = loadSurface("images/singleplayer.png");
+    if(gameImages[SINGLE_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[MULTI_BUTTON] = loadSurface("images/multiplayer.png");
+    if(gameImages[MULTI_BUTTON] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
     }
@@ -190,12 +229,6 @@ bool GameController::loadMedia()
         return false;
     }
 
-    gameImages[TEST_BUTTON] = loadSurface("images/Green_button.bmp");
-    if(gameImages[TEST_BUTTON] == NULL){
-        cout << "FAILED TO LOAD IMAGE" << endl;
-        return false;
-    }
-
     gameImages[BALL] = loadSurface("images/ball.png");
     if(gameImages[BALL] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
@@ -227,12 +260,15 @@ void GameController::setupObjects(){
     ball.setTexture(gameImages[BALL], gameRenderer);
     ball.gameObjectRect.y = SCREEN_HEIGHT/2 - ball.gameObjectRect.h/2;
     ball.gameObjectRect.x = SCREEN_WIDTH/2 - ball.gameObjectRect.w/2;
+    ball.resetBall();
 }
 
 void GameController::runGame()
 {
-    //Game Loop
-    while(quit == false)
+    buttonEvent menuEvent = runMainMenu();
+    cout << "Done with menu." << endl;
+
+    if(menuEvent == START_PVP)
     {
         startMultiplayer();
     }
@@ -326,12 +362,19 @@ void GameController::startMultiplayer()
                     quit = true;
                 }
 
-                if(e.key.keysym.sym  == SDLK_LSHIFT)
+                if(e.key.keysym.sym  == SDLK_LSHIFT|| e.key.keysym.sym == SDLK_RSHIFT)
                 {
                    debugMode = !debugMode;
                 }
 
-
+                if(e.key.keysym.sym  == SDLK_LCTRL || e.key.keysym.sym == SDLK_RCTRL)
+                {
+                   seizureMode = !seizureMode;
+                   if(!seizureMode)
+                   {
+                       SDL_SetRenderDrawColor(gameRenderer,0x00,0x00,0x00,0xFF);
+                   }
+                }
             }
         }//while
 
@@ -393,11 +436,16 @@ void GameController::startMultiplayer()
             ball.resetBall();
         }
 
-        applyTexture(ball);
+        if(seizureMode)
+        {
+            SDL_SetRenderDrawColor(gameRenderer,rand() % 0xFF,rand() % 0xFF, rand() % 0xFF, rand() % 0xFF);
+        }
+
         applyTexture(playerOne);
         applyTexture(playerTwo);
         applyTexture(playerOne.getMyScore());
         applyTexture(playerTwo.getMyScore());
+        applyTexture(ball);
 
         place_meeting(mouseX,mouseY,&playerOne,&playerTwo);
         collision_line(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,mouseX,mouseY,&playerTwo);
