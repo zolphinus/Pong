@@ -59,6 +59,7 @@ private:
     void setupObjects();
     void playerScored(Player&);
 
+    void checkPowerUps(int newBallX, int newBallY);
     void startMultiplayer();
     void startSingleplayer();
 

@@ -23,7 +23,7 @@ public:
 
     void pickedUp(PowerUp& currentItem);
 
-    bool getPowerUpState();
+    bool getPowerUpState(powerUpType);
 
 
 

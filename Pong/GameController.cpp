@@ -1013,7 +1013,7 @@ int GameController::moveBall()
         return 2;
     }
 
-
+    checkPowerUps(newBallX, newBallY);
 
     ball.xPosition = newBallX;
     ball.yPosition = newBallY;

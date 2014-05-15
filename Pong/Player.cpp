@@ -80,3 +80,10 @@ bool Player::getUpPressed()
 void Player::pickedUp(PowerUp& currentItem){
     currentItem.pickedUp();
 }
+
+
+
+bool Player::getPowerUpState(powerUpType getValue)
+{
+    return powerUpState[getValue];
+}

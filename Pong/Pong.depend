@@ -336,11 +336,11 @@
 1398138935 source:c:\users\zolphinus\desktop\code blocks projects\pong\paddle.cpp
 	"Paddle.h"
 
-1400118696 source:c:\users\zolphinus\documents\github\pong\pong\gamecontroller.cpp
+1400120249 source:c:\users\zolphinus\documents\github\pong\pong\gamecontroller.cpp
 	"GameController.h"
 	"GameConfig.h"
 
-1400115837 c:\users\zolphinus\documents\github\pong\pong\gamecontroller.h
+1400120147 c:\users\zolphinus\documents\github\pong\pong\gamecontroller.h
 	"GameConfig.h"
 	"MenuController.h"
 	"PowerUp.h"
@@ -377,7 +377,7 @@
 	"Player.h"
 	"Ball.h"
 
-1400118726 c:\users\zolphinus\documents\github\pong\pong\player.h
+1400120085 c:\users\zolphinus\documents\github\pong\pong\player.h
 	"GameConfig.h"
 	"Score.h"
 
