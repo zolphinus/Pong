@@ -3,6 +3,8 @@
 #include "GameConfig.h"
 #include "Score.h"
 
+class PowerUp;
+
 
 class Player : public GameObject
 {
@@ -19,6 +21,11 @@ public:
     bool getUpPressed();
     bool getDownPressed();
 
+    void pickedUp(PowerUp& currentItem);
+
+    bool getPowerUpState();
+
+
 
     int getScoreValue();
     SDL_Texture* getScoreImage();
@@ -27,10 +34,14 @@ public:
 
 
 
+
 private:
     bool isAI;
     Score myScore;
     bool upPressed,downPressed;
+    std::vector <bool> powerUpState;
+
+    int powerUpDuration;
 
 };
 

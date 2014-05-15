@@ -1,4 +1,5 @@
 #include "GameController.h"
+#include "GameConfig.h"
 
 using std::cout;
 using std::cin;
@@ -554,8 +555,10 @@ void GameController::setupObjects(){
     ball.gameObjectRect.x = SCREEN_WIDTH/2 - ball.gameObjectRect.w/2;
     ball.resetBall();
 
-    testItem.setTexture(gameImages[VELOCITY_POWER], gameRenderer);
-    testItem.spawnPowerUp(30);
+    powerUpList.resize(TOTAL_POWER_UPS);
+    randomPowerUp = 0;
+
+    powerUpList[TEST_ITEM].setTexture(gameImages[VELOCITY_POWER], gameRenderer);
 }
 
 void GameController::runGame()
@@ -776,19 +779,12 @@ void GameController::startMultiplayer()
             SDL_SetRenderDrawColor(gameRenderer,rand() % 0xFF,rand() % 0xFF, rand() % 0xFF, rand() % 0xFF);
         }
 
-        applyTexture(playerOne);
-        applyTexture(playerTwo);
-        applyTexture(playerOne.getMyScore());
-        applyTexture(playerTwo.getMyScore());
-        applyTexture(ball);
 
-        /*
-        if(testItem.getIsOnScreen())
-        {
-            applyTexture(testItem);
-        }
-        testItem.pickedUp();
-        */
+
+        displayObjects();
+
+
+
 
         place_meeting(mouseX,mouseY,&playerOne,&playerTwo);
         collision_line(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,mouseX,mouseY,&playerTwo);
@@ -956,11 +952,7 @@ void GameController::startSingleplayer()
             SDL_SetRenderDrawColor(gameRenderer,rand() % 0xFF,rand() % 0xFF, rand() % 0xFF, rand() % 0xFF);
         }
 
-        applyTexture(playerOne);
-        applyTexture(playerTwo);
-        applyTexture(playerOne.getMyScore());
-        applyTexture(playerTwo.getMyScore());
-        applyTexture(ball);
+        displayObjects();
 
         place_meeting(mouseX,mouseY,&playerOne,&playerTwo);
         collision_line(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,mouseX,mouseY,&playerTwo);
@@ -977,6 +969,8 @@ void GameController::startSingleplayer()
 
 int GameController::moveBall()
 {
+    //chance to spawn power-ups as ball moves
+
     float newBallX,newBallY;
 
     newBallX = ball.xPosition + ball.getXVelocity();
@@ -1000,12 +994,14 @@ int GameController::moveBall()
         ballHitBy = PLAYER_ONE;
         ball.horizontalBounce();
         newBallX = ball.gameObjectRect.x;
+        spawnRandomPowerUps();
     }
     else if(place_meeting(newBallX,newBallY,&ball,&playerTwo))
     {
         ballHitBy = PLAYER_TWO;
         ball.horizontalBounce();
         newBallX = ball.gameObjectRect.x;
+        spawnRandomPowerUps();
     }
 
     if(newBallX <= playerOne.gameObjectRect.x+playerOne.gameObjectRect.w)
@@ -1016,6 +1012,8 @@ int GameController::moveBall()
     {
         return 2;
     }
+
+
 
     ball.xPosition = newBallX;
     ball.yPosition = newBallY;
@@ -1139,7 +1137,73 @@ void GameController::playerScored(Player& scoringPlayer){
         scoringPlayer.setScore(tempScore, gameImages[NUMBER_NINE], gameRenderer);
         break;
     case 10:
+<<<<<<< HEAD
         scoringPlayer.setScore(tempScore, gameImages[NUMBER_NINE], gameRenderer);
+=======
+        //You win
+>>>>>>> 7928f94035ce11ed753321b9b01c27037cd4a474
         break;
+    }
+}
+
+
+void GameController::spawnRandomPowerUps()
+{
+    bool oneIsSpawned = false;
+
+    for(int i = 0; i < TOTAL_POWER_UPS; i++)
+    {
+        if(powerUpList[i].getIsOnScreen() == true)
+        {
+            oneIsSpawned = true;
+        }
+    }
+
+    if(oneIsSpawned == false)
+    {
+        randomPowerUp =  rand() % (30 * POWER_UP_RATE) + 1;
+        if(randomPowerUp <= 30)
+        {
+            randomPowerUp = rand() % TOTAL_POWER_UPS;
+            powerUpList[randomPowerUp].spawnPowerUp(10);
+        }
+    }
+}
+
+void GameController::displayObjects()
+{
+        applyTexture(playerOne);
+        applyTexture(playerTwo);
+        applyTexture(playerOne.getMyScore());
+        applyTexture(playerTwo.getMyScore());
+        applyTexture(ball);
+
+    for (int i = 0; i < TOTAL_POWER_UPS; i++)
+    {
+        if(powerUpList[i].getIsOnScreen())
+        {
+            applyTexture(powerUpList[TEST_ITEM]);
+        }
+    }
+}
+
+void GameController::checkPowerUps(int newBallX, int newBallY)
+{
+    for(int i = 0; i < TOTAL_POWER_UPS; i++)
+    {
+        if(powerUpList[i].getIsOnScreen())
+        {
+            if(place_meeting(newBallX,newBallY,&ball,&powerUpList[i]))
+            {
+                if(ballHitBy == PLAYER_ONE)
+                {
+                    playerOne.pickedUp(powerUpList[i]);
+                }
+                else if (ballHitBy == PLAYER_TWO)
+                {
+                    playerTwo.pickedUp(powerUpList[i]);
+                }
+            }
+        }
     }
 }

@@ -1,9 +1,11 @@
 #include "Player.h"
+#include "PowerUp.h"
 
 Player::Player(){
     isAI = false;
     upPressed = false;
     downPressed = false;
+    powerUpState.resize(TOTAL_POWER_UPS);
 }
 
 Player::~Player(){
@@ -73,4 +75,8 @@ bool Player::getDownPressed()
 bool Player::getUpPressed()
 {
     return this->upPressed;
+}
+
+void Player::pickedUp(PowerUp& currentItem){
+    currentItem.pickedUp();
 }
