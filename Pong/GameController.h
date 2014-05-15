@@ -73,15 +73,11 @@ private:
 
     void drawMainMenu();
     void drawPauseMenu();
-<<<<<<< HEAD
     void drawDiffMenu();
     void drawP1Splash();
     void drawP2Splash();
-=======
     void spawnRandomPowerUps();
     void displayObjects();
->>>>>>> 7928f94035ce11ed753321b9b01c27037cd4a474
-
     buttonEvent runMainMenu();
     buttonEvent runPauseMenu();
     buttonEvent runDiffMenu();

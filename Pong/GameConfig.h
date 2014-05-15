@@ -7,7 +7,7 @@ const int SPRITE_SIZE = 32;
 
 
 //A rate of one 1 or 0 is a 100% spawn on hit
-const int POWER_UP_RATE = 1;
+const int POWER_UP_RATE = 0;
 
 #include <vector>
 #include <iostream>
@@ -86,6 +86,8 @@ enum powerUpType
 {
     //Test Item is required as a default to test item generation values
     TEST_ITEM,
+
+    BLUE_SHELL,
     TOTAL_POWER_UPS
 };
 

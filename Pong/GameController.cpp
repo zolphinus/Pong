@@ -1137,11 +1137,9 @@ void GameController::playerScored(Player& scoringPlayer){
         scoringPlayer.setScore(tempScore, gameImages[NUMBER_NINE], gameRenderer);
         break;
     case 10:
-<<<<<<< HEAD
         scoringPlayer.setScore(tempScore, gameImages[NUMBER_NINE], gameRenderer);
-=======
+
         //You win
->>>>>>> 7928f94035ce11ed753321b9b01c27037cd4a474
         break;
     }
 }
@@ -1161,11 +1159,14 @@ void GameController::spawnRandomPowerUps()
 
     if(oneIsSpawned == false)
     {
-        randomPowerUp =  rand() % (30 * POWER_UP_RATE) + 1;
-        if(randomPowerUp <= 30)
+        randomPowerUp =  rand() % (30 * POWER_UP_RATE +1);
+        if(randomPowerUp <= 40)
         {
             randomPowerUp = rand() % TOTAL_POWER_UPS;
-            powerUpList[randomPowerUp].spawnPowerUp(10);
+            if(powerUpList[randomPowerUp].getTexture() != false)
+            {
+                powerUpList[randomPowerUp].spawnPowerUp(10);
+            }
         }
     }
 }
