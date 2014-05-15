@@ -12,6 +12,7 @@ public:
     ~Ball();
     float getXVelocity();
     float getYVelocity();
+    float getVelocity();
     void setXVelocity(int newValue);
     void setYVelocity(int newValue);
     void verticalBounce();

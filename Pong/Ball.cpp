@@ -10,6 +10,11 @@ Ball::~Ball()
 
 }
 
+float Ball::getVelocity()
+{
+    return velocity;
+}
+
 float Ball::getXVelocity()
 {
     return xVelocity;

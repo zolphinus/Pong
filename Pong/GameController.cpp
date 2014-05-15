@@ -82,6 +82,8 @@ void GameController::initGame(){
 
         setupObjects();
         initMainMenu();
+        initPauseMenu();
+        initDiffMenu();
     }
 }
 
@@ -102,13 +104,87 @@ void GameController::initMainMenu()
     newButton->gameObjectRect.y = SCREEN_HEIGHT/2+prevButtonHeight+16;
     mainMenu.addButton(newButton,START_AI);
 
+    prevButtonHeight = prevButtonHeight+16+newButton->gameObjectRect.h;
+}
+
+void GameController::initPauseMenu()
+{
+    int prevButtonHeight = 0;
+    Button *newButton = new Button(0,0);
+    newButton->setTexture(gameImages[MAIN_MENU_BUTTON],gameRenderer);
+    newButton->gameObjectRect.x = SCREEN_WIDTH/2 - newButton->gameObjectRect.w/2;
+    newButton->gameObjectRect.y = SCREEN_HEIGHT/2;
+    pauseMenu.addButton(newButton,MAIN_MENU);
+
     prevButtonHeight = newButton->gameObjectRect.h;
+
+    newButton = new Button(0,0);
+    newButton->setTexture(gameImages[RESUME_BUTTON],gameRenderer);
+    newButton->gameObjectRect.x = SCREEN_WIDTH/2 - newButton->gameObjectRect.w/2;
+    newButton->gameObjectRect.y = SCREEN_HEIGHT/2+prevButtonHeight+16;
+    pauseMenu.addButton(newButton,RESUME);
+
+    prevButtonHeight = prevButtonHeight+16+newButton->gameObjectRect.h;
+}
+
+void GameController::initDiffMenu()
+{
+    int prevButtonHeight = 0;
+    Button *newButton = new Button(0,0);
+    newButton->setTexture(gameImages[EASY_BUTTON],gameRenderer);
+    newButton->gameObjectRect.x = SCREEN_WIDTH/2 - newButton->gameObjectRect.w/2;
+    newButton->gameObjectRect.y = SCREEN_HEIGHT/2;
+    diffMenu.addButton(newButton,EASY_PICKED);
+
+    prevButtonHeight = newButton->gameObjectRect.h;
+
+    newButton = new Button(0,0);
+    newButton->setTexture(gameImages[MEDIUM_BUTTON],gameRenderer);
+    newButton->gameObjectRect.x = SCREEN_WIDTH/2 - newButton->gameObjectRect.w/2;
+    newButton->gameObjectRect.y = SCREEN_HEIGHT/2+prevButtonHeight+16;
+    diffMenu.addButton(newButton,MEDIUM_PICKED);
+
+    prevButtonHeight = prevButtonHeight+16+newButton->gameObjectRect.h;
+
+    newButton = new Button(0,0);
+    newButton->setTexture(gameImages[HARD_BUTTON],gameRenderer);
+    newButton->gameObjectRect.x = SCREEN_WIDTH/2 - newButton->gameObjectRect.w/2;
+    newButton->gameObjectRect.y = SCREEN_HEIGHT/2+prevButtonHeight+16;
+    diffMenu.addButton(newButton,HARD_PICKED);
 }
 
 void GameController::drawMainMenu()
 {
     SDL_RenderClear(gameRenderer);
     mainMenu.drawMenu(gameRenderer);
+    SDL_RenderPresent(gameRenderer);
+}
+
+void GameController::drawPauseMenu()
+{
+    SDL_RenderClear(gameRenderer);
+    pauseMenu.drawMenu(gameRenderer);
+    SDL_RenderPresent(gameRenderer);
+}
+
+void GameController::drawDiffMenu()
+{
+    SDL_RenderClear(gameRenderer);
+    diffMenu.drawMenu(gameRenderer);
+    SDL_RenderPresent(gameRenderer);
+}
+
+void GameController::drawP1Splash()
+{
+    SDL_RenderClear(gameRenderer);
+    P1splash.drawMenu(gameRenderer);
+    SDL_RenderPresent(gameRenderer);
+}
+
+void GameController::drawP2Splash()
+{
+    SDL_RenderClear(gameRenderer);
+    P2splash.drawMenu(gameRenderer);
     SDL_RenderPresent(gameRenderer);
 }
 
@@ -134,10 +210,149 @@ buttonEvent GameController::runMainMenu()
                     return QUIT;
                 }
             }
+            else if(menuTemp.type == SDL_MOUSEBUTTONDOWN)
+            {
+                currentEvent = mainMenu.mouseCheck();
+            }
         }
 
         drawMainMenu();
-        currentEvent = mainMenu.mouseCheck();
+    }
+
+    return currentEvent;
+}
+
+buttonEvent GameController::runPauseMenu()
+{
+    buttonEvent currentEvent = NONE;
+
+    SDL_Event menuTemp;
+
+    while(currentEvent == NONE)
+    {
+        //Clear the event queue so SDL doesn't barf
+        while(SDL_PollEvent(&menuTemp) != 0)
+        {
+            if(menuTemp.type == SDL_QUIT)
+            {
+                return QUIT;
+            }
+            else if(menuTemp.type == SDL_KEYDOWN)
+            {
+                if(menuTemp.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    return QUIT;
+                }
+            }
+            else if(menuTemp.type == SDL_MOUSEBUTTONDOWN)
+            {
+                currentEvent = pauseMenu.mouseCheck();
+            }
+        }
+
+        drawPauseMenu();
+    }
+
+    return currentEvent;
+}
+
+buttonEvent GameController::runDiffMenu()
+{
+    buttonEvent currentEvent = NONE;
+
+    SDL_Event menuTemp;
+
+    while(currentEvent == NONE)
+    {
+        //Clear the event queue so SDL doesn't barf
+        while(SDL_PollEvent(&menuTemp) != 0)
+        {
+            if(menuTemp.type == SDL_QUIT)
+            {
+                return QUIT;
+            }
+            else if(menuTemp.type == SDL_KEYDOWN)
+            {
+                if(menuTemp.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    return QUIT;
+                }
+            }
+            else if(menuTemp.type == SDL_MOUSEBUTTONDOWN)
+            {
+                currentEvent = diffMenu.mouseCheck();
+            }
+        }
+
+        drawDiffMenu();
+    }
+
+    return currentEvent;
+}
+
+buttonEvent GameController::runP1Splash()
+{
+    buttonEvent currentEvent = NONE;
+
+    SDL_Event menuTemp;
+
+    while(currentEvent == NONE)
+    {
+        //Clear the event queue so SDL doesn't barf
+        while(SDL_PollEvent(&menuTemp) != 0)
+        {
+            if(menuTemp.type == SDL_QUIT)
+            {
+                return QUIT;
+            }
+            else if(menuTemp.type == SDL_KEYDOWN)
+            {
+                if(menuTemp.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    return QUIT;
+                }
+            }
+            else if(menuTemp.type == SDL_MOUSEBUTTONDOWN)
+            {
+                currentEvent = P1splash.mouseCheck();
+            }
+        }
+
+        drawP1Splash();
+    }
+
+    return currentEvent;
+}
+
+buttonEvent GameController::runP2Splash()
+{
+    buttonEvent currentEvent = NONE;
+
+    SDL_Event menuTemp;
+
+    while(currentEvent == NONE)
+    {
+        //Clear the event queue so SDL doesn't barf
+        while(SDL_PollEvent(&menuTemp) != 0)
+        {
+            if(menuTemp.type == SDL_QUIT)
+            {
+                return QUIT;
+            }
+            else if(menuTemp.type == SDL_KEYDOWN)
+            {
+                if(menuTemp.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    return QUIT;
+                }
+            }
+            else if(menuTemp.type == SDL_MOUSEBUTTONDOWN)
+            {
+                currentEvent = P2splash.mouseCheck();
+            }
+        }
+
+        drawP2Splash();
     }
 
     return currentEvent;
@@ -163,7 +378,6 @@ bool GameController::loadMedia()
     //Loading success flag
     bool success = true;
 
-
     //Loads images into the Game Images array so that we can reuse them multiple times
     //without needing to re-open the files
     gameImages[BLUE_PADDLE] = loadSurface("images/blue_paddle.png");
@@ -186,6 +400,48 @@ bool GameController::loadMedia()
 
     gameImages[MULTI_BUTTON] = loadSurface("images/multiplayer.png");
     if(gameImages[MULTI_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[MAIN_MENU_BUTTON] = loadSurface("images/mainmenu.png");
+    if(gameImages[MAIN_MENU_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[RESUME_BUTTON] = loadSurface("images/resume.png");
+    if(gameImages[RESUME_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[EASY_BUTTON] = loadSurface("images/easybutton.png");
+    if(gameImages[EASY_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[MEDIUM_BUTTON] = loadSurface("images/medium.png");
+    if(gameImages[MEDIUM_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[HARD_BUTTON] = loadSurface("images/hard.png");
+    if(gameImages[HARD_BUTTON] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[P1_WIN_SPLASH] = loadSurface("images/p1winsplash.png");
+    if(gameImages[P1_WIN_SPLASH] == NULL){
+        cout << "FAILED TO LOAD IMAGE" << endl;
+        return false;
+    }
+
+    gameImages[P2_WIN_SPLASH] = loadSurface("images/p2winsplash.png");
+    if(gameImages[P2_WIN_SPLASH] == NULL){
         cout << "FAILED TO LOAD IMAGE" << endl;
         return false;
     }
@@ -267,6 +523,15 @@ bool GameController::loadMedia()
 
 void GameController::setupObjects(){
 
+
+    Button *newButton = new Button(0,0);
+    newButton->setTexture(gameImages[P1_WIN_SPLASH],gameRenderer);
+    P1splash.addButton(newButton,MAIN_MENU);
+
+    newButton = new Button(0,0);
+    newButton->setTexture(gameImages[P2_WIN_SPLASH],gameRenderer);
+    P2splash.addButton(newButton,MAIN_MENU);
+
     //Initializes starting locations for paddles
     playerOne.setTexture(gameImages[BLUE_PADDLE],gameRenderer);
     playerOne.gameObjectRect.y = (SCREEN_HEIGHT / 2) - (playerOne.gameObjectRect.h /2);
@@ -295,6 +560,8 @@ void GameController::setupObjects(){
 
 void GameController::runGame()
 {
+    playerOne.setScore(0,gameImages[NUMBER_ZERO],gameRenderer);
+    playerTwo.setScore(0,gameImages[NUMBER_ZERO],gameRenderer);
     buttonEvent menuEvent = runMainMenu();
     cout << "Done with menu." << endl;
 
@@ -304,6 +571,19 @@ void GameController::runGame()
     }
     else if(menuEvent == START_AI)
     {
+        menuEvent = runDiffMenu();
+        if(menuEvent == EASY_PICKED)
+        {
+            AISpeedCap = 3;
+        }
+        else if(menuEvent == MEDIUM_PICKED)
+        {
+            AISpeedCap = 6;
+        }
+        else
+        {
+            AISpeedCap = 9;
+        }
         startSingleplayer();
     }
 }
@@ -327,6 +607,7 @@ void GameController::applyTexture(GameObject& updatedObject)
 
 void GameController::startMultiplayer()
 {
+    buttonEvent pauseEvent = NONE;
     while(quit == false)
     {
         //Input from players
@@ -409,6 +690,16 @@ void GameController::startMultiplayer()
                        SDL_SetRenderDrawColor(gameRenderer,0x00,0x00,0x00,0xFF);
                    }
                 }
+
+                if(e.key.keysym.sym == SDLK_p)
+                {
+                    pauseEvent = runPauseMenu();
+                    if(pauseEvent != RESUME)
+                    {
+                        quit = true;
+                        break;
+                    }
+                }
             }
             else if(e.type == SDL_QUIT)
             {
@@ -474,6 +765,12 @@ void GameController::startMultiplayer()
             ball.resetBall();
         }
 
+        if(playerOne.getScoreValue() == 10 || playerTwo.getScoreValue() == 10)
+        {
+            quit = true;
+            break;
+        }
+
         if(seizureMode)
         {
             SDL_SetRenderDrawColor(gameRenderer,rand() % 0xFF,rand() % 0xFF, rand() % 0xFF, rand() % 0xFF);
@@ -498,10 +795,26 @@ void GameController::startMultiplayer()
 
         SDL_RenderPresent(gameRenderer);
     }
+
+    if(playerOne.getScoreValue() == 10)
+    {
+        pauseEvent = runP1Splash();
+    }
+    else if(playerTwo.getScoreValue() == 10)
+    {
+        pauseEvent = runP2Splash();
+    }
+
+    if(pauseEvent == MAIN_MENU)
+    {
+        quit = false;
+        runGame();
+    }
 }
 
 void GameController::startSingleplayer()
 {
+    buttonEvent pauseEvent = NONE;
     while(quit == false)
     {
         //Input from player
@@ -514,7 +827,6 @@ void GameController::startSingleplayer()
                 if( e.key.keysym.sym  == SDLK_w)
                 {
                     playerOne.setUpPressed(true);
-
                 }
 
                 if( e.key.keysym.sym  == SDLK_s)
@@ -556,6 +868,16 @@ void GameController::startSingleplayer()
                        SDL_SetRenderDrawColor(gameRenderer,0x00,0x00,0x00,0xFF);
                    }
                 }
+
+                if(e.key.keysym.sym == SDLK_p)
+                {
+                    pauseEvent = runPauseMenu();
+                    if(pauseEvent != RESUME)
+                    {
+                        quit = true;
+                        break;
+                    }
+                }
             }
             else if(e.type == SDL_QUIT)
             {
@@ -591,7 +913,6 @@ void GameController::startSingleplayer()
             playerTwo.gameObjectRect.y = ball.gameObjectRect.y+ball.gameObjectRect.h/2-playerTwo.gameObjectRect.h/2;
         }
 
-        //
         if(playerOne.gameObjectRect.y < 0)
         {
             playerOne.gameObjectRect.y = 0;
@@ -645,6 +966,12 @@ void GameController::startSingleplayer()
         collision_line(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,mouseX,mouseY,&playerTwo);
 
         SDL_RenderPresent(gameRenderer);
+    }
+
+    if(pauseEvent == MAIN_MENU)
+    {
+        quit = false;
+        runGame();
     }
 }
 
@@ -812,7 +1139,7 @@ void GameController::playerScored(Player& scoringPlayer){
         scoringPlayer.setScore(tempScore, gameImages[NUMBER_NINE], gameRenderer);
         break;
     case 10:
-        std::cout << "SCORING WORKS" << std::endl;
+        scoringPlayer.setScore(tempScore, gameImages[NUMBER_NINE], gameRenderer);
         break;
     }
 }

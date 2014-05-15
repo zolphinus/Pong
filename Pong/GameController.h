@@ -9,6 +9,7 @@
 
 class GameController{
 public:
+
     GameController();
     ~GameController();
     void runGame();
@@ -22,6 +23,7 @@ protected:
 
 
 private:
+
     SDL_Window* gameWindow;
     SDL_Renderer *gameRenderer;
     Uint8 *keystate; //smoother keyboard interactions
@@ -40,7 +42,7 @@ private:
     bool debugMode, seizureMode;
 
     //Menu objects
-    MenuController mainMenu, pauseMenu, diffMenu;
+    MenuController mainMenu, pauseMenu, diffMenu, P1splash, P2splash;
 
     //Holds all the game images for reuse
     SDL_Surface* gameImages[IMAGE_LOADED_TOTAL];
@@ -57,18 +59,25 @@ private:
     void startMultiplayer();
     void startSingleplayer();
 
-    int AISpeedCap;
+    int AISpeedCap, difficulty;
 
     int moveBall();
 
     void initMainMenu();
     void initPauseMenu();
+    void initDiffMenu();
 
     void drawMainMenu();
     void drawPauseMenu();
+    void drawDiffMenu();
+    void drawP1Splash();
+    void drawP2Splash();
 
     buttonEvent runMainMenu();
     buttonEvent runPauseMenu();
+    buttonEvent runDiffMenu();
+    buttonEvent runP1Splash();
+    buttonEvent runP2Splash();
 
     bool collision_point(int, int, GameObject *);
     bool collision_line(int, int, int, int, GameObject *);

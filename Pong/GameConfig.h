@@ -22,6 +22,13 @@ enum ImagesLoaded
     RED_PADDLE,
     SINGLE_BUTTON,
     MULTI_BUTTON,
+    RESUME_BUTTON,
+    MAIN_MENU_BUTTON,
+    EASY_BUTTON,
+    MEDIUM_BUTTON,
+    HARD_BUTTON,
+    P1_WIN_SPLASH,
+    P2_WIN_SPLASH,
     NUMBER_ZERO,
     NUMBER_ONE,
     NUMBER_TWO,
@@ -64,6 +71,9 @@ enum buttonEvent
     RESUME,
     START_AI,
     START_PVP,
+    EASY_PICKED,
+    MEDIUM_PICKED,
+    HARD_PICKED,
     MAIN_MENU
 
 };
