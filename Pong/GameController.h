@@ -3,7 +3,7 @@
 #include "GameConfig.h"
 #include "MenuController.h"
 #include "PowerUp.h"
-
+#include <vector>
 
 
 
@@ -30,7 +30,10 @@ private:
     Player playerOne;
     Player playerTwo;
     Ball   ball;
-    PowerUp testItem;
+    int randomPowerUp;
+
+
+    std::vector <PowerUp> powerUpList;
 
     Last_Hit ballHitBy;
 
@@ -66,6 +69,8 @@ private:
 
     void drawMainMenu();
     void drawPauseMenu();
+    void spawnRandomPowerUps();
+    void displayObjects();
 
     buttonEvent runMainMenu();
     buttonEvent runPauseMenu();

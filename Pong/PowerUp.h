@@ -1,11 +1,15 @@
 #ifndef POWER_UP
 #define POWER_UP
 #include "GameObject.h"
+#include "GameConfig.h"
+
+class Player;
+
 
 class PowerUp : public GameObject{
 
 public:
-    PowerUp();
+    PowerUp(powerUpType powerUpID = TEST_ITEM);
     bool getIsActive();
     bool getIsOnScreen();
 
@@ -19,6 +23,8 @@ private:
     int duration;
     bool isActive;
     bool isOnScreen;
+
+    powerUpType itemID;
 
 };
 

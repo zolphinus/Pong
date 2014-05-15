@@ -1,7 +1,17 @@
 #include "PowerUp.h"
 #include "GameConfig.h"
 
-PowerUp::PowerUp(){
+PowerUp::PowerUp(powerUpType powerUpID){
+
+    if(powerUpID > TOTAL_POWER_UPS)
+    {
+        itemID = powerUpID;
+    }
+    else
+    {
+        itemID = TEST_ITEM;
+    }
+
     isActive = false;
     isOnScreen = false;
     duration = 0;

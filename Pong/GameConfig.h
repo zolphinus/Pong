@@ -5,6 +5,10 @@ const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 const int SPRITE_SIZE = 32;
 
+
+//A rate of one 1 or 0 is a 100% spawn on hit
+const int POWER_UP_RATE = 1;
+
 #include <vector>
 #include <iostream>
 #include <SDL.h>
@@ -66,6 +70,13 @@ enum buttonEvent
     START_PVP,
     MAIN_MENU
 
+};
+
+enum powerUpType
+{
+    //Test Item is required as a default to test item generation values
+    TEST_ITEM,
+    TOTAL_POWER_UPS
 };
 
 #include "GameObject.h"
