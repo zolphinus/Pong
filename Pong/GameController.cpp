@@ -43,10 +43,17 @@ void GameController::initGame(){
     srand(time(NULL));
     AISpeedCap = 3;
 
-    //error check for initialization
-    if( SDL_Init(SDL_INIT_VIDEO) < 0){
+    //init music
+    MenuMusic = NULL;
+    SeizureMusic = NULL;
+    MainMusic = NULL;
+    Bounce = NULL;
+    SeizureBounce = NULL;
+    SonicBoom = NULL;
 
-        //printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+    //error check for initialization
+    if( SDL_Init(SDL_INIT_VIDEO || SDL_INIT_AUDIO) < 0){
+
         cout << "SDL could not initialize! " << SDL_GetError();
     }
     else
@@ -71,6 +78,11 @@ void GameController::initGame(){
         if(IMG_Init(imgFlags) != imgFlags)
         {
             cout << "SDL_image failed to initialize: " << IMG_GetError();
+        }
+
+        if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048)<0)
+        {
+            cout<<"SDL_mixer could not initialize, Error: "<<Mix_GetError()<<endl;
         }
 
         bool mediaLoaded = loadMedia();
@@ -519,6 +531,48 @@ bool GameController::loadMedia()
         return false;
     }
 
+    MenuMusic = Mix_LoadMUS("sounds/mainMenu.wav");
+    if(MenuMusic==NULL)
+    {
+        cout<<"Error loading MenuMusic"<<endl;
+        return false;
+    }
+
+    SeizureMusic = Mix_LoadMUS("sounds/seizureMusic.wav");
+    if(SeizureMusic==NULL)
+    {
+        cout<<"Error loading SeizureMusic"<<endl;
+        return false;
+    }
+
+    MainMusic = Mix_LoadMUS("sounds/gameloop.wav");
+    if(MainMusic==NULL)
+    {
+        cout<<"Error loading MainMusic"<<endl;
+        return false;
+    }
+
+    Bounce = Mix_LoadWAV("sounds/bounce.wav");
+    if(Bounce==NULL)
+    {
+        cout<<"Error loading Bounce"<<endl;
+        return false;
+    }
+
+    SeizureBounce = Mix_LoadWAV("sounds/seizureBounce.wav");
+    if(SeizureBounce==NULL)
+    {
+        cout<<"Error loading SeizureBounce"<<endl;
+        return false;
+    }
+
+    SonicBoom = Mix_LoadWAV("sounds/sonicBoom.wav");
+    if(SonicBoom==NULL)
+    {
+        cout<<"Error loading SonicBoom"<<endl;
+        return false;
+    }
+
     return success;
 }
 
@@ -563,6 +617,7 @@ void GameController::setupObjects(){
 
 void GameController::runGame()
 {
+    Mix_PlayMusic(MenuMusic,-1);
     playerOne.setScore(0,gameImages[NUMBER_ZERO],gameRenderer);
     playerTwo.setScore(0,gameImages[NUMBER_ZERO],gameRenderer);
     buttonEvent menuEvent = runMainMenu();
@@ -570,10 +625,12 @@ void GameController::runGame()
 
     if(menuEvent == START_PVP)
     {
+        Mix_HaltMusic();
         startMultiplayer();
     }
     else if(menuEvent == START_AI)
     {
+        Mix_HaltMusic();
         menuEvent = runDiffMenu();
         if(menuEvent == EASY_PICKED)
         {
@@ -610,6 +667,7 @@ void GameController::applyTexture(GameObject& updatedObject)
 
 void GameController::startMultiplayer()
 {
+    Mix_PlayMusic(MainMusic,-1);
     buttonEvent pauseEvent = NONE;
     while(quit == false)
     {
@@ -688,9 +746,15 @@ void GameController::startMultiplayer()
                 if(e.key.keysym.sym  == SDLK_LCTRL || e.key.keysym.sym == SDLK_RCTRL)
                 {
                    seizureMode = !seizureMode;
+                   Mix_HaltMusic();
                    if(!seizureMode)
                    {
+                       Mix_PlayMusic(MainMusic,-1);
                        SDL_SetRenderDrawColor(gameRenderer,0x00,0x00,0x00,0xFF);
+                   }
+                   else
+                   {
+                       Mix_PlayMusic(SeizureMusic,-1);
                    }
                 }
 
@@ -810,6 +874,7 @@ void GameController::startMultiplayer()
 
 void GameController::startSingleplayer()
 {
+    Mix_PlayMusic(MainMusic,-1);
     buttonEvent pauseEvent = NONE;
     while(quit == false)
     {
@@ -858,10 +923,17 @@ void GameController::startSingleplayer()
 
                 if(e.key.keysym.sym  == SDLK_LCTRL || e.key.keysym.sym == SDLK_RCTRL)
                 {
+
                    seizureMode = !seizureMode;
+                   Mix_HaltMusic();
                    if(!seizureMode)
                    {
+                       Mix_PlayMusic(MainMusic,-1);
                        SDL_SetRenderDrawColor(gameRenderer,0x00,0x00,0x00,0xFF);
+                   }
+                   else
+                   {
+                       Mix_PlayMusic(SeizureMusic,-1);
                    }
                 }
 
@@ -995,6 +1067,22 @@ int GameController::moveBall()
         ball.horizontalBounce();
         newBallX = ball.gameObjectRect.x;
         spawnRandomPowerUps();
+        if(!seizureMode)
+        {
+            if(ball.getVelocity()>15)
+            {
+                Mix_PlayChannel(-1,SonicBoom,0);
+            }
+            else
+            {
+                Mix_PlayChannel(-1,Bounce,0);
+            }
+
+        }
+        else
+        {
+            Mix_PlayChannel(-1,SeizureBounce,0);
+        }
     }
     else if(place_meeting(newBallX,newBallY,&ball,&playerTwo))
     {
@@ -1002,6 +1090,22 @@ int GameController::moveBall()
         ball.horizontalBounce();
         newBallX = ball.gameObjectRect.x;
         spawnRandomPowerUps();
+                if(!seizureMode)
+        {
+            if(ball.getVelocity()>15)
+            {
+                Mix_PlayChannel(-1,SonicBoom,0);
+            }
+            else
+            {
+                Mix_PlayChannel(-1,Bounce,0);
+            }
+
+        }
+        else
+        {
+            Mix_PlayChannel(-1,SeizureBounce,0);
+        }
     }
 
     if(newBallX <= playerOne.gameObjectRect.x+playerOne.gameObjectRect.w)

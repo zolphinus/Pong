@@ -17,6 +17,7 @@ const int POWER_UP_RATE = 0;
 #include <stdlib.h>
 #include <ctime>
 #include <cmath>
+#include <SDL_mixer.h>
 
 enum ImagesLoaded
 {

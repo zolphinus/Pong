@@ -34,6 +34,13 @@ private:
     Ball   ball;
     int randomPowerUp;
 
+    //Music+sound
+    Mix_Music *MainMusic;
+    Mix_Music *SeizureMusic;
+    Mix_Music *MenuMusic;
+    Mix_Chunk *Bounce;
+    Mix_Chunk *SeizureBounce;
+    Mix_Chunk *SonicBoom;
 
     std::vector <PowerUp> powerUpList;
 
